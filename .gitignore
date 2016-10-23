@@ -1,0 +1,10 @@
+# Compiled source #
+###################
+*.png
+*.jpg
+*.mp3
+*.zip
+*.wav
+*.mp4
+*.DS_Store
+/img_old
