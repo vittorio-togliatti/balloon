@@ -46,21 +46,33 @@ SideScroller.Menu.prototype = {
         this.but_extras = this.game.add.sprite(-200, 235, 'btn_extras',0);
         this.but_extras.inputEnabled = true;
         this.but_extras.events.onInputDown.add(this.gotEstadoVideo, this);
-        var tween = this.game.add.tween(this.but_extras).to( { x: 260 }, 1800, Phaser.Easing.Bounce.Out, true);
+        var tween = this.game.add.tween(this.but_extras).to( { x: 260 }, 1800, Phaser.Easing.Cubic.Out, true);
         },
     
   inCredits: function() {
         this.but_creditos = this.game.add.sprite(-200, 280, 'btn_creditos',0);
         this.but_creditos.inputEnabled = true;
         this.but_creditos.events.onInputDown.add(this.gotEstadoVideo, this);
-        var tween = this.game.add.tween(this.but_creditos).to( { x: 260 }, 1800, Phaser.Easing.Bounce.Out, true);
+        var tween = this.game.add.tween(this.but_creditos).to( { x: 260 }, 1800, Phaser.Easing.Cubic.Out, true);
         },
     
   inLogo: function() {
+      this.pinguiIntro = this.game.add.sprite(430, 90, 'intro_pinguino',0);
+      this.pinguiIntro.visible = false;
+      
       this.intro_logo = this.game.add.sprite(350, -250, 'portada_logo',0);
-        var tween = this.game.add.tween(this.intro_logo).to( { y: 20 }, 1800, Phaser.Easing.Bounce.Out, true);
-  }
+        var tween = this.game.add.tween(this.intro_logo).to( { y: 20 }, 1800, Phaser.Easing.Cubic.Out, true);
+        tween.onComplete.add(this.showPingui, this);
+  },
     
+  showPingui: function() {
+      this.pinguiIntro.visible = true;
+      var anim_pingui = this.pinguiIntro.animations.add('intro_pinguino');
+      anim_pingui.play(10, true);
+      var tween = this.game.add.tween(this.pinguiIntro).to( { x:470,y: 5 }, 2500, Phaser.Easing.Cubic.Out, true);
+        
+        
+  }
     
     
 };

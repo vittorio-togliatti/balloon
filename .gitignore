@@ -5,6 +5,8 @@
 *.mp3
 *.zip
 *.wav
+*.ogg
 *.mp4
 *.DS_Store
 /img_old
+

@@ -15,7 +15,7 @@ SideScroller.Boot.prototype = {
   },
  
   create: function() {
-    this.bkg = this.game.add.sprite(0, 0,  'preloadbkg');
+    
     this.game.stage.backgroundColor = '#C9C9C9';
  
     //scaling options
@@ -33,7 +33,7 @@ SideScroller.Boot.prototype = {
       
       
     //start full screen
-    this.game.scale.startFullScreen(true);
+    this.game.scale.startFullScreen(false);
  
     this.state.start('Preload');
  

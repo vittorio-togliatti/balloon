@@ -55,8 +55,9 @@ SideScroller.Mapa.prototype = {
       
     if (nivel == null) {
         nivel = 0;
+        localStorage.setItem('nivel',nivel);
     }
-      
+    
       nivel =4;
     
       if (nivel > 3){//Asia

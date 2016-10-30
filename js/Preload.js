@@ -38,15 +38,12 @@ SideScroller.Preload.prototype = {
     this.load.spritesheet('btn_creditos', 'img/portada_menu/btn_creditos.png', 150, 38, 2);
     this.load.image('portada_logo', 'img/portada_menu/portada_logo.png');
     this.load.spritesheet('btn_creditos', 'img/portada_menu/pingu_tiles_118.png', 150, 38, 2);
-      
+    this.load.spritesheet('intro_pinguino', 'img/portada_menu/pingu_tiles_118.png', 118, 122, 11);
       
       
     //Video
-    this.load.video('video_intro', 'img/video/intro.mp4'); //!!!!!!
-      this.load.video('video_intro1', 'img/video/intro.mp4'); //!!!!!!
-      this.load.video('video_intro2', 'img/video/intro.mp4'); //!!!!!!
-      this.load.video('video_intro3', 'img/video/intro.mp4'); //!!!!!!
-    this.load.image('next', 'img/video/next.png');
+    
+      
       
     //Mapa
     this.load.spritesheet('ss_botones', 'img/mapa/btn_target.png', 19, 19, 3);
@@ -79,11 +76,14 @@ SideScroller.Preload.prototype = {
     //this.load.tilemap('level1', 'assets/tilemaps/level1.json', null, Phaser.Tilemap.TILED_JSON);
       
     //Game
-    this.load.audio('explosion', 'audio/explosion.mp3');
-    this.load.audio('shoot', 'audio/pak_shoot.mp3');
-    this.load.audio('goal', 'audio/goal.mp3');
-    this.load.audio('up', 'audio/up.mp3');
-    this.load.audio('fuego', 'audio/fuego.wav');
+    this.load.audio('explosion', 'audio/explosion.ogg');
+    this.load.audio('shoot', 'audio/pak_shoot.ogg');
+    this.load.audio('goal', 'audio/goal.ogg');
+    this.load.audio('up', 'audio/up.ogg');
+    this.load.audio('correct', 'audio/correct.ogg');
+    this.load.audio('wrong', 'audio/wrong.ogg');
+    this.load.audio('loop', 'audio/8bit-loop.ogg');
+    
       
     this.load.spritesheet('btn_continuar', 'img/common/btn_continuar.png', 150, 38, 2);
     this.load.spritesheet('btn_mapa', 'img/common/btn_mapa.png', 150, 38, 2);
@@ -95,30 +95,57 @@ SideScroller.Preload.prototype = {
     this.load.image('suelo', 'img/common/suelo_1.png');
     this.load.spritesheet('particulas', 'img/common/particula_amarilla.png', 5, 5, 6);
     
-    this.load.image('bkg_america_back', 'img/norteamerica/bkg_nortamerica_back_1024.png');
-    this.load.image('bkg_america_middle', 'img/norteamerica/bkg_nortamerica_middle_1024.png');
-    this.load.image('bkg_america_front', 'img/norteamerica/bkg_nortamerica_front_2048x2048.png');
+    //norteamerica
+    this.load.image('bkg_norteamerica_bk', 'img/norteamerica/bkg_nortamerica_back_1024.png');
+    this.load.image('bkg_norteamerica_mid', 'img/norteamerica/bkg_nortamerica_middle_1024.png');
+    this.load.image('bkg_norteamerica_fr', 'img/norteamerica/bkg_nortamerica_front_2048x2048.png');
+    this.load.spritesheet('sheet_primerobjetivo', 'img/norteamerica/sheet_fabrica.png', 128, 128, 4);
+    
+    //Sudamerica
+    this.load.image('bkg_sudamerica_bk', 'img/sudamerica/bkg_sudamerica_back_1024.png');
+    this.load.image('bkg_sudamerica_mid', 'img/sudamerica/bkg_sudamerica_middle_1024.png');
+    this.load.image('bkg_sudamerica_fr', 'img/sudamerica/bkg_sudamerica_front_2048x2048.png');
+    
+      
     
       
     //objetos en suelo
-    this.load.image('fabrica', 'img/norteamerica/fabrica.png');
+    //this.load.image('fabrica', 'img/norteamerica/fabrica.png');
     this.load.image('fabricaColor', 'img/norteamerica/fabrica_2.png');
+      
+    //common  
     this.load.image('grua', 'img/common/grua2.png');
     this.load.image('arbolesSecos', 'img/common/arboles_secos.png');
     this.game.load.physics("sprite_physics", "img/balloon.json");
-    this.game.load.physics("sprite_physics_avion", "img/avion.json");
+    //this.game.load.physics("sprite_physics_avion", "img/avion.json");
       
       
     //objetos en el aire
     this.load.image('avion', 'img/common/avion.png');
       
     this.load.image('btn_pausa', 'img/common/btn_pausa.png');
+      
+    //Preguntas
+    this.load.image('pregunta1', 'img/preguntas/preg1.png');
+    this.load.image('pregunta2', 'img/preguntas/preg2.png');
+    this.load.image('pregunta3', 'img/preguntas/preg3.png');
+    this.load.image('pregunta4', 'img/preguntas/preg4.png');
+    this.load.image('pregunta5', 'img/preguntas/preg5.png');
+    this.load.image('pregunta6', 'img/preguntas/preg6.png');
+    this.load.image('pregunta7', 'img/preguntas/preg7.png');
+    this.load.image('pregunta8', 'img/preguntas/preg8.png');
+    this.load.image('pregunta9', 'img/preguntas/preg9.png');
+    this.load.image('pregunta10', 'img/preguntas/preg10.png');
+    this.load.image('pregunta11', 'img/preguntas/preg11.png');
+    this.load.image('pregunta12', 'img/preguntas/preg12.png');
+    this.load.image('pregunta13', 'img/preguntas/preg13.png');
+    this.load.image('pregunta14', 'img/preguntas/preg14.png');
+    this.load.image('pregunta15', 'img/preguntas/preg15.png');
+      
    
   },
  
   create: function() {
- 
-    //this.state.start('Menu');
       this.state.start('Menu');
  
   }

@@ -15,6 +15,15 @@ SideScroller.Game.prototype = {
     },
  
   create: function() {
+    this.end=false;
+    this.onGround=false;
+      
+    var nivel = localStorage.getItem('nivel');
+    nivel = nivel*1;
+      
+    //nivel = 1;
+    
+    
     this.game.stage.backgroundColor = '#C9C9C9';
     this.MINIMUM_SWIPE_LENGTH = 30;
     this.game.world.setBounds(0, 0, windowWidth * 2, windowHeight);
@@ -34,17 +43,26 @@ SideScroller.Game.prototype = {
     this.globoCollisionGroup = this.game.physics.p2.createCollisionGroup();
     this.gruasCollisionGroup = this.game.physics.p2.createCollisionGroup();
     this.fabricasCollisionGroup = this.game.physics.p2.createCollisionGroup();
-    //this.sueloCollisionGroup = this.game.physics.p2.createCollisionGroup(); //Controlo a mano
     this.paquetesCollisionGroup = this.game.physics.p2.createCollisionGroup();
     this.avionesCollisionGroup = this.game.physics.p2.createCollisionGroup();
+    this.secondObjectCollisionGroup = this.game.physics.p2.createCollisionGroup();
       
-    //Background
-    //this.bkg = this.game.add.sprite(0, 0,  'america_bg');
-    //this.game.physics.arcade.enable(this.bkg);
-      
-    this.bkg_back = this.add.tileSprite(0, -664,windowWidth,1024,'bkg_america_back');
-    this.bkg_middle = this.add.tileSprite(0, -664,windowWidth,1024,'bkg_america_middle');
-    this.bkg_front = this.add.tileSprite(0, -1688 ,windowWidth,2048,'bkg_america_front');
+      //Backgrounds
+    switch(nivel) {
+        case 0://NordAmerica
+        this.bkg_back = this.add.tileSprite(0, -664,windowWidth,1024,'bkg_norteamerica_bk');
+        this.bkg_middle = this.add.tileSprite(0, -664,windowWidth,1024,'bkg_norteamerica_mid');
+        this.bkg_front = this.add.tileSprite(0, -1688 ,windowWidth,2048,'bkg_norteamerica_fr');
+        break;
+            
+        case 1://SudAmerica 
+        this.bkg_back = this.add.tileSprite(0, -664,windowWidth,1024,'bkg_sudamerica_bk');
+        this.bkg_middle = this.add.tileSprite(0, -664,windowWidth,1024,'bkg_sudamerica_mid');
+        this.bkg_front = this.add.tileSprite(0, -1688 ,windowWidth,2048,'bkg_sudamerica_fr');
+        break;
+      }
+    
+    
       
     //barra energia
     this.barraEnergia = this.game.add.sprite(70, 20, 'barra_energia',0);
@@ -56,6 +74,9 @@ SideScroller.Game.prototype = {
 
     //El globo
     this.player = this.game.add.sprite(200, 150, 'tile_globo',0);
+    this.anim_suelo_globo = this.player.animations.add('suelo',[3,4,5]);
+    
+      
     this.anim_desinfla_globo = this.player.animations.add('desinfla',[2,3]);
     this.anim_acelera_globo = this.player.animations.add('acelera',[1]);
     this.game.physics.p2.enable([this.player], false);
@@ -85,6 +106,7 @@ SideScroller.Game.prototype = {
     this.fabricas = this.game.add.group();
     this.paquetes = this.game.add.group();
     this.aviones = this.game.add.group();
+    this.objetivos2 = this.game.add.group();
       
     //Elementos de juego
     this.boton_pausa = this.game.add.sprite(550, 40, 'btn_pausa');
@@ -138,9 +160,25 @@ SideScroller.Game.prototype = {
         this.player.body.velocity.y = 0;
       
       // si el globo sale de abajo se acabó
-        if (this.player.y > windowHeight - 70) {
-            this.end = true;
-            this.gotoPausa();
+        if (this.player.y > windowHeight - 72) {
+            
+            this.player.body.velocity.y = 0;
+            this.player.body.velocity.x = 0; 
+            
+            if (!this.end){
+                this.audio_collision.play();
+            }
+            
+            if (!this.onGround) {
+                this.onGround = true;
+                this.end = true;
+                this.player.body.gravity.y = 0; 
+                this.player.body.clearCollision(true, true)
+                this.anim_suelo_globo.onComplete.add(this.gotoPausa, this);
+                this.anim_suelo_globo.play(10, false);
+                   
+            }
+            
         }
             
   },
@@ -160,11 +198,12 @@ SideScroller.Game.prototype = {
     
     addFabric: function(x, y) {
         
-        var fabrica = this.fabricas.create(x, y, 'fabrica');
-        this.game.physics.p2.enable([fabrica], false);
+        var fabrica = this.fabricas.create(x, y, 'sheet_primerobjetivo',0);
+        this.game.physics.p2.enable([fabrica], true);
+        
         fabrica.body.clearShapes();
-
         fabrica.body.loadPolygon("sprite_physics", "fabrica");
+        
         fabrica.body.fixedRotation = true;
         fabrica.body.data.gravityScale = 0;
         fabrica.body.damping = 0;
@@ -177,6 +216,14 @@ SideScroller.Game.prototype = {
         
         fabrica.checkWorldBounds = true;
         fabrica.outOfBoundsKill = true;
+        
+        if (nivel = 1){
+            fabrica.animations.add('animacion',[0,1,2]);
+            fabrica.play('animacion', 2, true);
+        }
+       
+        
+
             },
     
     addGrua: function(x, y) {
@@ -242,7 +289,7 @@ SideScroller.Game.prototype = {
         if ((hole == 1) || (hole == 2) ){
             this.addArboles(800, this.game.height - 65);
             } else if(hole == 3){
-                this.addFabric(800, this.game.height - 83);
+                this.addFabric(800, this.game.height - 100);
             } else if(hole == 4){
                 this.addAvion(800,this.game.height - 300);
             }else {
@@ -300,8 +347,8 @@ SideScroller.Game.prototype = {
         swipe_length = Phaser.Point.distance(this.end_swipe_point, this.start_swipe_point);
         
         if (swipe_length >= this.MINIMUM_SWIPE_LENGTH) {
-           this.addPaquete(this.player.x,this.player.y);
-            //this.audio_shoot.play();
+           this.addPaquete(this.player.x,this.player.y + 15);
+            this.audio_shoot.play();
         }
     },
     
@@ -314,7 +361,7 @@ SideScroller.Game.prototype = {
             paquete.sprite.body.destroy();
             this.audio_goal.play();
             
-            fabrica.sprite.loadTexture('fabricaColor', 0);
+            fabrica.sprite.loadTexture('sheet_primerobjetivo', 3);
        
             this.emitter = this.add.emitter(fabrica.sprite.body.x, fabrica.sprite.body.y, 10);
             this.emitter.makeParticles('particulas', [0, 1, 2, 3, 4, 5]);
@@ -348,6 +395,7 @@ SideScroller.Game.prototype = {
     hitGrua: function(body1, body2) {
         
         if (this.end == false) {
+            this.player.body.velocity.x = 0; 
             this.audio_collision.play();
             this.anim_desinfla_globo.play(5, true);
             this.player.body.clearCollision(true, true)
@@ -377,12 +425,14 @@ SideScroller.Game.prototype = {
                         this.game.paused = false;        
                         this.but_continue.visible = false;
                         this.but_mapa.visible = false;
+                        
             
                         this.restartGame();
                         } else {
                             this.game.paused = false;        
                             this.but_continue.visible = false;
-                            this.but_mapa.visible = false;  
+                            this.but_mapa.visible = false; 
+                            
                         }
                 
                 }
