@@ -6,7 +6,7 @@ var originalWidth = 2560;
 //parametros de juego
 //var bgk_speed = -50;
 var bgk_speed = 0.5;
-var bgk_middle_speed = 1;
+var bgk_middle_speed = 0.7;
 var bgk_front_speed = 1.5;
 var ground_speed = 2.5;
 
@@ -47,5 +47,7 @@ SideScroller.game.state.add('Menu', SideScroller.Menu);
 SideScroller.game.state.add('Video', SideScroller.Video);
 SideScroller.game.state.add('Mapa', SideScroller.Mapa);
 SideScroller.game.state.add('Game', SideScroller.Game);
+SideScroller.game.state.add('MainQuiz', SideScroller.MainQuiz);
+SideScroller.game.state.add('QuizFinal', SideScroller.QuizFinal);
 
 SideScroller.game.state.start('Boot');

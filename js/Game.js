@@ -17,6 +17,8 @@ SideScroller.Game.prototype = {
   create: function() {
     this.end=false;
     this.onGround=false;
+    this.powerUpLevelMax = 1;
+    
       
     var nivel = localStorage.getItem('nivel');
     nivel = nivel*1;
@@ -59,6 +61,30 @@ SideScroller.Game.prototype = {
         this.bkg_back = this.add.tileSprite(0, -664,windowWidth,1024,'bkg_sudamerica_bk');
         this.bkg_middle = this.add.tileSprite(0, -664,windowWidth,1024,'bkg_sudamerica_mid');
         this.bkg_front = this.add.tileSprite(0, -1688 ,windowWidth,2048,'bkg_sudamerica_fr');
+        break;
+            
+        case 2://Europa 
+        this.bkg_back = this.add.tileSprite(0, -664,windowWidth,1024,'bkg_europa_bk');
+        this.bkg_middle = this.add.tileSprite(0, -664,windowWidth,1024,'bkg_europa_mid');
+        this.bkg_front = this.add.tileSprite(0, -1688 ,windowWidth,2048,'bkg_europa_fr');
+        break;
+            
+        case 3://Africa 
+        this.bkg_back = this.add.tileSprite(0, -664,windowWidth,1024,'bkg_africa_bk');
+        this.bkg_middle = this.add.tileSprite(0, -664,windowWidth,1024,'bkg_africa_mid');
+        this.bkg_front = this.add.tileSprite(0, -1688 ,windowWidth,2048,'bkg_africa_fr');
+        break;
+            
+        case 4://Oceania
+        this.bkg_back = this.add.tileSprite(0, -664,windowWidth,1024,'bkg_asia_bk');
+        this.bkg_middle = this.add.tileSprite(0, -664,windowWidth,1024,'bkg_asia_mid');
+        this.bkg_front = this.add.tileSprite(0, -1688 ,windowWidth,2048,'bkg_asia_fr');
+        break;
+            
+        case 5://Asia 
+        this.bkg_back = this.add.tileSprite(0, -664,windowWidth,1024,'bkg_oceania_bk');
+        this.bkg_middle = this.add.tileSprite(0, -664,windowWidth,1024,'bkg_oceania_mid');
+        this.bkg_front = this.add.tileSprite(0, -1688 ,windowWidth,2048,'bkg_oceania_fr');
         break;
       }
     
@@ -375,6 +401,13 @@ SideScroller.Game.prototype = {
             this.powerup += 1;
        
             this.barraEnergia.body.sprite.loadTexture('barra_energia', this.powerup);
+           //alert(this.powerup);
+           //alert(this.powerUpLevelMax);
+           
+           if (this.powerup == this.powerUpLevelMax){
+                //alert("entra");
+               this.gotoMainQuiz();
+           }
            
        }
             
@@ -455,6 +488,10 @@ SideScroller.Game.prototype = {
     // Restart the game
         restartGame: function() {
             this.state.start('Game');
+            },
+    
+        gotoMainQuiz: function() {
+            this.state.start('MainQuiz');
             }
     
     

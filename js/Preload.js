@@ -83,6 +83,8 @@ SideScroller.Preload.prototype = {
     this.load.audio('correct', 'audio/correct.ogg');
     this.load.audio('wrong', 'audio/wrong.ogg');
     this.load.audio('loop', 'audio/8bit-loop.ogg');
+    this.load.audio('correct', 'audio/correct.ogg');
+    this.load.audio('wrong', 'audio/wrong.ogg');
     
       
     this.load.spritesheet('btn_continuar', 'img/common/btn_continuar.png', 150, 38, 2);
@@ -105,6 +107,26 @@ SideScroller.Preload.prototype = {
     this.load.image('bkg_sudamerica_bk', 'img/sudamerica/bkg_sudamerica_back_1024.png');
     this.load.image('bkg_sudamerica_mid', 'img/sudamerica/bkg_sudamerica_middle_1024.png');
     this.load.image('bkg_sudamerica_fr', 'img/sudamerica/bkg_sudamerica_front_2048x2048.png');
+      
+    //Europa
+    this.load.image('bkg_europa_bk', 'img/europa/bkg_europa_back_1024.png');
+    this.load.image('bkg_europa_mid', 'img/europa/bkg_europa_middle_1024.png');
+    this.load.image('bkg_europa_fr', 'img/europa/bkg_europa_front_2048x2048.png');
+      
+    //Africa
+    this.load.image('bkg_africa_bk', 'img/africa/bkg_africa_back_1024.png');
+    this.load.image('bkg_africa_mid', 'img/africa/bkg_africa_middle_1024.png');
+    this.load.image('bkg_africa_fr', 'img/africa/bkg_africa_front_2048x2048.png');
+      
+    //Asia
+    this.load.image('bkg_asia_bk', 'img/asia/bkg_asia_back_1024.png');
+    this.load.image('bkg_asia_mid', 'img/asia/bkg_asia_middle_1024.png');
+    this.load.image('bkg_asia_fr', 'img/asia/bkg_asia_front_2048x2048.png');
+      
+    //Oceania
+    this.load.image('bkg_oceania_bk', 'img/oceania/bkg_oceania_back_1024.png');
+    this.load.image('bkg_oceania_mid', 'img/oceania/bkg_oceania_middle_1024.png');
+    this.load.image('bkg_oceania_fr', 'img/oceania/bkg_oceania_front_2048x2048.png');
     
       
     
@@ -126,6 +148,14 @@ SideScroller.Preload.prototype = {
     this.load.image('btn_pausa', 'img/common/btn_pausa.png');
       
     //Preguntas
+    this.load.image('but_a', 'img/preguntas/btn_a.png');
+    this.load.image('but_b', 'img/preguntas/btn_b.png');
+    this.load.image('but_c', 'img/preguntas/btn_c.png');
+      
+    this.load.image('info_congrats', 'img/common/info_congrats.png');
+    this.load.image('info_dead', 'img/common/info_dead.png');
+      
+      
     this.load.image('pregunta1', 'img/preguntas/preg1.png');
     this.load.image('pregunta2', 'img/preguntas/preg2.png');
     this.load.image('pregunta3', 'img/preguntas/preg3.png');
@@ -142,12 +172,21 @@ SideScroller.Preload.prototype = {
     this.load.image('pregunta14', 'img/preguntas/preg14.png');
     this.load.image('pregunta15', 'img/preguntas/preg15.png');
       
+    this.load.image('preg_ant_13', 'img/preguntas/ant_preg13.png');
+    this.load.image('preg_ant_16', 'img/preguntas/ant_preg16.png');
+    this.load.image('preg_ant_17', 'img/preguntas/ant_preg17.png');
+    this.load.image('preg_ant_18', 'img/preguntas/ant_preg18.png');
+    this.load.image('preg_ant_19', 'img/preguntas/ant_preg19.png');
+    this.load.image('preg_ant_20', 'img/preguntas/ant_preg20.png');
+    this.load.image('preg_ant_21', 'img/preguntas/ant_preg21.png');
+    this.load.image('preg_ant_22', 'img/preguntas/ant_preg22.png');
+    
+    
    
   },
  
   create: function() {
       this.state.start('Menu');
- 
   }
  
 };

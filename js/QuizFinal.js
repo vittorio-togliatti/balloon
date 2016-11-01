@@ -1,9 +1,9 @@
 var SideScroller = SideScroller || {};
  
-SideScroller.MainQuiz = function() {};
+SideScroller.QuizFinal = function() {};
 
 
-SideScroller.MainQuiz.prototype = {
+SideScroller.QuizFinal.prototype = {
  
   preload: function(){
  
@@ -11,33 +11,24 @@ SideScroller.MainQuiz.prototype = {
  
   create: function() {
     this.nivel = localStorage.getItem('nivel')*1;
-     //localStorage.setItem('nivel',0);
     
-      
     this.correct  = this.add.audio('correct');
     this.wrong  = this.add.audio('wrong');
     
-      if (typeof this.preguntaActual == 'undefined'){
-          this.preguntaActual=0;
-      }
-      
-      //alert(this.nivel);
-      //alert(this.preguntaActual);
+    this.preguntaActual = 0;
     
-      
-    var preguntasJson = '{"continentes":[{"continente":[{"numPregunta":8,"respuesta":2},{"numPregunta":9,"respuesta":3}]},{ "continente":[{"numPregunta":3,"respuesta":2},{"numPregunta":6,"respuesta":3}]},{"continente":[{"numPregunta":7,"respuesta":1},{"numPregunta":11,"respuesta":3},{"numPregunta":12,"respuesta":3}]},{"continente":[{"numPregunta":1,"respuesta":3},{"numPregunta":2,"respuesta":1}]},{"continente":[{"numPregunta":4,"respuesta":1},{"numPregunta":5,"respuesta":3},{"numPregunta":10,"respuesta":1}]},{"continente":[{"numPregunta":14,"respuesta":2},{"numPregunta":15,"respuesta":3}]}]}';
+    var preguntasJson = '{"preguntas":[{"numPregunta":13,"respuesta":1},{"numPregunta":16,"respuesta":1},{"numPregunta":17,"respuesta":1},{"numPregunta":18,"respuesta":1},{"numPregunta":19,"respuesta":1},{"numPregunta":20,"respuesta":1},{"numPregunta":21,"respuesta":1},{"numPregunta":22,"respuesta":1}]}';
       
     this.preguntasObject = JSON.parse(preguntasJson);
       
-    //alert(preguntasObject.continentes[0].continente[0]); 
     
-    var numImgPreguntaActual = this.preguntasObject.continentes[this.nivel].continente[this.preguntaActual].numPregunta;
-    var imgPreguntaActual = this.game.add.sprite(0, 0, "pregunta" + numImgPreguntaActual);
+    var numImgPreguntaActual = this.preguntasObject.preguntas[this.preguntaActual].numPregunta;
+    var imgPreguntaActual = this.game.add.sprite(0, 0, "preg_ant_" + numImgPreguntaActual);
     
       
-    this.but_a = this.game.add.sprite(286, 151, "but_a");
-    this.but_b = this.game.add.sprite(286, 209, "but_b");
-    this.but_c = this.game.add.sprite(286, 265, "but_c");
+    this.but_a = this.game.add.sprite(219, 104, "but_a");
+    this.but_b = this.game.add.sprite(219, 151, "but_b");
+    this.but_c = this.game.add.sprite(219, 198, "but_c");
     this.but_a.inputEnabled = true;
     this.but_b.inputEnabled = true;
     this.but_c.inputEnabled = true;
