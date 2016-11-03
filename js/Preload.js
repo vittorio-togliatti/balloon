@@ -101,12 +101,13 @@ SideScroller.Preload.prototype = {
     this.load.image('bkg_norteamerica_bk', 'img/norteamerica/bkg_nortamerica_back_1024.png');
     this.load.image('bkg_norteamerica_mid', 'img/norteamerica/bkg_nortamerica_middle_1024.png');
     this.load.image('bkg_norteamerica_fr', 'img/norteamerica/bkg_nortamerica_front_2048x2048.png');
-    this.load.spritesheet('sheet_primerobjetivo', 'img/norteamerica/sheet_fabrica.png', 128, 128, 4);
+    this.load.spritesheet('sheet_fabrica', 'img/norteamerica/sheet_fabrica.png', 128, 128, 4);
     
     //Sudamerica
     this.load.image('bkg_sudamerica_bk', 'img/sudamerica/bkg_sudamerica_back_1024.png');
     this.load.image('bkg_sudamerica_mid', 'img/sudamerica/bkg_sudamerica_middle_1024.png');
     this.load.image('bkg_sudamerica_fr', 'img/sudamerica/bkg_sudamerica_front_2048x2048.png');
+    this.load.spritesheet('sheet_hospital', 'img/sudamerica/sheet_hospital.png', 140, 64, 2);
       
     //Europa
     this.load.image('bkg_europa_bk', 'img/europa/bkg_europa_back_1024.png');
@@ -138,12 +139,14 @@ SideScroller.Preload.prototype = {
     //common  
     this.load.image('grua', 'img/common/grua2.png');
     this.load.image('arbolesSecos', 'img/common/arboles_secos.png');
-    this.game.load.physics("sprite_physics", "img/balloon.json");
+    this.game.load.physics("sprite_physics", "balloon.json");
     //this.game.load.physics("sprite_physics_avion", "img/avion.json");
       
       
     //objetos en el aire
     this.load.image('avion', 'img/common/avion.png');
+    this.load.spritesheet('sheet_helicoptero', 'img/common/heli.png', 39, 20, 2);
+      
       
     this.load.image('btn_pausa', 'img/common/btn_pausa.png');
       

@@ -57,7 +57,7 @@ SideScroller.Menu.prototype = {
         },
     
   inLogo: function() {
-      this.pinguiIntro = this.game.add.sprite(430, 90, 'intro_pinguino',0);
+      this.pinguiIntro = this.game.add.sprite(440, 80, 'intro_pinguino',0);
       this.pinguiIntro.visible = false;
       
       this.intro_logo = this.game.add.sprite(350, -250, 'portada_logo',0);
@@ -69,7 +69,7 @@ SideScroller.Menu.prototype = {
       this.pinguiIntro.visible = true;
       var anim_pingui = this.pinguiIntro.animations.add('intro_pinguino');
       anim_pingui.play(10, true);
-      var tween = this.game.add.tween(this.pinguiIntro).to( { x:470,y: 5 }, 2500, Phaser.Easing.Cubic.Out, true);
+      var tween = this.game.add.tween(this.pinguiIntro).to( { x:470,y: 5 }, 1000, Phaser.Easing.Cubic.Out, true);
         
         
   }
