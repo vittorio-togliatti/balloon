@@ -49,5 +49,6 @@ SideScroller.game.state.add('Mapa', SideScroller.Mapa);
 SideScroller.game.state.add('Game', SideScroller.Game);
 SideScroller.game.state.add('MainQuiz', SideScroller.MainQuiz);
 SideScroller.game.state.add('QuizFinal', SideScroller.QuizFinal);
+SideScroller.game.state.add('Credits', SideScroller.Credits);
 
 SideScroller.game.state.start('Boot');

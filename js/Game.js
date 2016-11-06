@@ -16,12 +16,12 @@ SideScroller.Game.prototype = {
  
   create: function() {
       
-    //*******  customize *******//
+    //*******  variables customización *******//
     this.powerUpLevelMax = 3;
     this.MINIMUM_SWIPE_LENGTH = 30;
     
       
-    //*****  end customize *****//
+    //***********  end customize ************//
       
       
     this.end=false;
@@ -38,7 +38,6 @@ SideScroller.Game.prototype = {
     this.audio_shoot  = this.add.audio('shoot');
     this.audio_goal  = this.add.audio('goal');
     this.audio_up  = this.add.audio('up');
-    //this.audio_fuego  = this.add.audio('fuego');
       
     
     //  Create collision groups
@@ -50,7 +49,11 @@ SideScroller.Game.prototype = {
     this.secondObjectCollisionGroup = this.game.physics.p2.createCollisionGroup();
     this.helicopterosCollisionGroup = this.game.physics.p2.createCollisionGroup();
       
-      //Parametrizacion Continentes
+    this.firstObjectX = 800;
+    this.secondObjectSheetName = "sheet_arbol_gran";
+    this.secondObjectY = 47;
+      
+    //Parametrizacion Continentes
     switch(this.nivel) {
         case 0://NordAmerica
         this.bkg_back = this.add.tileSprite(0, -664,windowWidth,1024,'bkg_norteamerica_bk');
@@ -61,7 +64,7 @@ SideScroller.Game.prototype = {
         this.firstObjectSheetName = "sheet_fabrica"
         this.firstObjectColorFrame = 3;
         this.firstObjectX = 800;
-        this.firstObjectY = 100;
+        this.firstObjectY = 96;
         break;
             
         case 1://SudAmerica 
@@ -72,8 +75,7 @@ SideScroller.Game.prototype = {
         this.firstObjectHasSheet = true;
         this.firstObjectSheetName = "sheet_hospital"
         this.firstObjectColorFrame = 1;
-        this.firstObjectX = 800;
-        this.firstObjectY = 70;
+        this.firstObjectY = 64;
         break;
             
         case 2://Europa 
@@ -81,6 +83,11 @@ SideScroller.Game.prototype = {
         this.bkg_middle = this.add.tileSprite(0, -664,windowWidth,1024,'bkg_europa_mid');
         this.bkg_front = this.add.tileSprite(0, -1688 ,windowWidth,2048,'bkg_europa_fr');
         this.firstObjectName = "nuclear";
+        this.firstObjectHasSheet = true;
+        this.firstObjectHasSecondAnimation = true;
+        this.firstObjectSheetName = "sheet_nuclear"
+        this.firstObjectColorFrame =3;
+        this.firstObjectY = 94;
         break;
             
         case 3://Africa 
@@ -88,6 +95,11 @@ SideScroller.Game.prototype = {
         this.bkg_middle = this.add.tileSprite(0, -664,windowWidth,1024,'bkg_africa_mid');
         this.bkg_front = this.add.tileSprite(0, -1688 ,windowWidth,2048,'bkg_africa_fr');
         this.firstObjectName = "choza";
+        this.firstObjectHasSheet = true;
+        this.firstObjectSheetName = "sheet_choza";
+        this.firstObjectHasSecondAnimation = false;
+        this.firstObjectColorFrame =1;
+        this.firstObjectY = 57;
         break;
             
         case 4://Asia
@@ -95,13 +107,22 @@ SideScroller.Game.prototype = {
         this.bkg_middle = this.add.tileSprite(0, -664,windowWidth,1024,'bkg_asia_mid');
         this.bkg_front = this.add.tileSprite(0, -1688 ,windowWidth,2048,'bkg_asia_fr');
         this.firstObjectName = "escuela";
+        this.firstObjectHasSheet = true;
+        this.firstObjectSheetName = "sheet_escuela"
+        this.firstObjectColorFrame =1;
+        this.firstObjectX = 800;
+        this.firstObjectY = 67;
         break;
             
         case 5://Oceania 
         this.bkg_back = this.add.tileSprite(0, -664,windowWidth,1024,'bkg_oceania_bk');
         this.bkg_middle = this.add.tileSprite(0, -664,windowWidth,1024,'bkg_oceania_mid');
         this.bkg_front = this.add.tileSprite(0, -1688 ,windowWidth,2048,'bkg_oceania_fr');
-        this.firstObjectName = "mar_sucio";
+        this.firstObjectName = "mar";
+        this.firstObjectHasSheet = true;
+        this.firstObjectSheetName = "sheet_mar"
+        this.firstObjectColorFrame =1;
+        this.firstObjectY = 20;
         break;
       }
     
@@ -127,15 +148,16 @@ SideScroller.Game.prototype = {
     this.player.body.data.gravityScale = 1;
     this.player.body.fixedRotation = true;
     this.player.body.setCollisionGroup(this.globoCollisionGroup);
-    this.player.body.collides( [this.gruasCollisionGroup,this.firstObjectCollisionGroup,this.avionesCollisionGroup,this.helicopterosCollisionGroup], this.hitGrua, this);
+    this.player.body.collides( [this.gruasCollisionGroup,this.firstObjectCollisionGroup,this.avionesCollisionGroup,this.helicopterosCollisionGroup,this.secondObjectCollisionGroup], this.hitGrua, this);
       
     //El suelo
-    this.ground = this.add.tileSprite(0,windowHeight - 35,windowWidth,35,'suelo');
+    this.ground = this.add.tileSprite(0,windowHeight - 32,windowWidth,32,'suelo');
     this.physics.arcade.enable(this.ground);
     this.ground.enableBody = true;
     this.ground.body.collideWorldBounds = true;
     this.ground.body.immovable = true;
     this.ground.body.allowGravity = false;
+      //this.ground.visible = false;
     
     //objetos suelo
     this.objetos = this.game.add.group();
@@ -148,19 +170,19 @@ SideScroller.Game.prototype = {
     this.paquetes = this.game.add.group();
     this.aviones = this.game.add.group();
     this.helicopteros = this.game.add.group();
-    this.objetivos2 = this.game.add.group();
+    this.secondObjects = this.game.add.group();
     this.firstObjects = this.game.add.group();
     this.secondObjects = this.game.add.group();
       
     //Elementos de juego
-    this.boton_pausa = this.game.add.sprite(550, 40, 'btn_pausa');
+    this.boton_pausa = this.game.add.sprite(580, 20, 'btn_pausa');
     this.boton_pausa.inputEnabled = true;
     this.boton_pausa.events.onInputDown.add(this.gotoPausa, this);
       
-    this.but_continue = this.game.add.sprite(170, 150, 'btn_continuar',0);
+    this.but_continue = this.game.add.sprite(260, 120, 'btn_continuar',0);
     this.but_continue.inputEnabled = true;
       
-    this.but_mapa = this.game.add.sprite(320, 150, 'btn_mapa',0);
+    this.but_mapa = this.game.add.sprite(260, 170, 'btn_mapa',0);
       
     this.but_continue.visible = false;
     this.but_mapa.visible = false;
@@ -269,7 +291,10 @@ SideScroller.Game.prototype = {
         firstObject.checkWorldBounds = true;
         firstObject.outOfBoundsKill = true;
         
-        if (this.nivel == 0){
+        if (this.nivel == 0){//Norteamerica
+            firstObject.animations.add('animacion',[0,1,2]);
+            firstObject.play('animacion', 2, true);
+        } else if(this.nivel == 2){//Europa
             firstObject.animations.add('animacion',[0,1,2]);
             firstObject.play('animacion', 2, true);
         }
@@ -277,6 +302,26 @@ SideScroller.Game.prototype = {
         
 
             },
+    
+    addSecondObject: function(x, y) {
+        var secondObject = this.secondObjects.create(x, y, this.secondObjectSheetName,0);
+        this.game.physics.p2.enable([secondObject], false);
+        
+        secondObject.body.fixedRotation = true;
+        secondObject.body.data.gravityScale = 0;
+        secondObject.body.damping = 0;
+        secondObject.body.static = true;
+        
+        secondObject.body.setCollisionGroup(this.secondObjectCollisionGroup);
+        secondObject.body.collides([this.globoCollisionGroup,this.paquetesCollisionGroup]);
+        
+        secondObject.body.velocity.x = groundObjectsSpeed;
+        
+        secondObject.checkWorldBounds = true;
+        secondObject.outOfBoundsKill = true;
+        secondObject.isSecondObject = true;
+      
+    },
     
     addGrua: function(x, y) {
         
@@ -350,7 +395,6 @@ SideScroller.Game.prototype = {
     addArboles: function(x, y) {
         
         var arboles = this.add.sprite(x, y, 'arbolesSecos');
-        //arboles.scale.setTo(currentScaleFactor, currentScaleFactor);
         this.physics.arcade.enable(arboles);
         this.objetos.add(arboles);
         arboles.body.velocity.x = groundObjectsSpeed; 
@@ -361,16 +405,20 @@ SideScroller.Game.prototype = {
             },
     
     addObjectsOnFloor: function() {
-        var hole = Math.floor(Math.random() * 5) + 1;
+        var hole = Math.floor(Math.random() * 10) + 1;
         
-        if ((hole == 1) || (hole == 2) ){
-            this.addArboles(800, this.game.height - 65);
-            } else if(hole == 3){
+        if (hole < 2 ){
+            this.addSecondObject(this.firstObjectX + 40, this.game.height - this.secondObjectY);
+            this.addSecondObject(this.firstObjectX + 15, this.game.height - this.secondObjectY);
+            this.addSecondObject(this.firstObjectX, this.game.height - this.secondObjectY);
+            } else if(hole < 4){
                 this.addFirstObject(this.firstObjectX, this.game.height - this.firstObjectY);
-            } else if(hole == 4){
-                this.addArboles(800,this.game.height - 65);
+            } else if(hole < 9){
+               this.addArboles(800, this.game.height - 63);
+            } else if(hole < 11){
+                 this.addGrua(800, this.game.height - 101);
             }else {
-                this.addGrua(800, this.game.height - 98);
+               //Res
             }
         },
     
@@ -389,17 +437,11 @@ SideScroller.Game.prototype = {
         
         var paquete = this.paquetes.create(x, y, 'paquete');
         this.game.physics.p2.enable([paquete], false);
-        //paquete.body.clearShapes();
-        //body type static??????
-        //grua.body.loadPolygon("sprite_physics", "grua");
+    
         paquete.body.fixedRotation = false;
         paquete.body.data.gravityScale = 1;
-        //paquete.body.damping = 1;
-        
         paquete.body.setCollisionGroup(this.paquetesCollisionGroup);
-        paquete.body.collides([this.firstObjectCollisionGroup],this.collisionFirstObject, this);
-        
-        //paquete.body.velocity.x = groundObjectsSpeed; 
+        paquete.body.collides([this.firstObjectCollisionGroup,this.secondObjectCollisionGroup],this.collisionObject, this);
 
         paquete.checkWorldBounds = true;
         paquete.outOfBoundsKill = true;
@@ -407,9 +449,7 @@ SideScroller.Game.prototype = {
         if (this.player.body.velocity.y > 0){
             paquete.body.velocity.y = this.player.body.velocity.y;
         }
-//
-//        paquete.checkWorldBounds = true;
-//        paquete.outOfBoundsKill = true;
+
             },
     
     
@@ -427,33 +467,36 @@ SideScroller.Game.prototype = {
         swipe_length = Phaser.Point.distance(this.end_swipe_point, this.start_swipe_point);
         
         if (swipe_length >= this.MINIMUM_SWIPE_LENGTH) {
-           this.addPaquete(this.player.x,this.player.y + 15);
+           this.addPaquete(this.player.x,this.player.y + 35);
             this.audio_shoot.play();
         }
     },
     
-   collisionFirstObject: function(paquete, firstObject) {
+   collisionObject: function(paquete, objetoColision) {
        
-       if (firstObject.customColored==null){ //solo primera colision
-           firstObject.customColored = true;
+       if (objetoColision.primeraColision == null){
+           objetoColision.primeraColision = true;
            
             paquete.sprite.kill(); 
             paquete.sprite.body.destroy();
             this.audio_goal.play();
+           
+           if (objetoColision.sprite.isSecondObject){
+                objetoColision.sprite.loadTexture(this.secondObjectSheetName, 1, false);
+           } else{
             
-           if (this.firstObjectHasSheet){
-               firstObject.sprite.loadTexture(this.firstObjectSheetName, this.firstObjectColorFrame);
-           } else {
-               //********************** Añadir *************************
-               //firstObject.sprite.loadTexture(this.firstObjectSheetName, 3);
-               //********************** Añadir *************************
+               if (this.firstObjectHasSecondAnimation){
+                   objetoColision.sprite.animations.add('animacion2',[3,4,5,6,7,8]);
+                   objetoColision.sprite.play('animacion2', 10, true);
+               } else if(this.firstObjectHasSheet){
+                    objetoColision.sprite.loadTexture(this.firstObjectSheetName, this.firstObjectColorFrame);
+               }
            }
-            
-       
-            this.emitter = this.add.emitter(firstObject.sprite.body.x, firstObject.sprite.body.y, 10);
+           
+           
+            this.emitter = this.add.emitter(objetoColision.sprite.body.x, objetoColision.sprite.body.y, 10);
             this.emitter.makeParticles('particulas', [0, 1, 2, 3, 4, 5]);
             this.emitter.start(true, 2000,null,20);
-           // this.time.events.add(3000, this.destroyEmitter, this);
        
             this.powerEmitter = this.add.emitter(60, 20);
             this.powerEmitter.makeParticles('particulas', [0, 1, 2, 3, 4, 5]);
@@ -476,12 +519,12 @@ SideScroller.Game.prototype = {
     
    checkGround: function(paquete) {
        
-             if (paquete.y > (windowHeight - 30)){
+             if (paquete.y > (windowHeight - 37)){
                   paquete.body.velocity.y = 0;
                   paquete.body.velocity.x = groundObjectsSpeed;
                  paquete.body.data.gravityScale = 0;
              }
-   },
+        },
     
     hitGrua: function(body1, body2) {
         
@@ -492,11 +535,8 @@ SideScroller.Game.prototype = {
             this.player.body.clearCollision(true, true)
             
             this.end = true;
-        } 
-        
-        
-            //this.restartGame();
-   },
+            } 
+        },
     
     
     gotoPausa: function() {
@@ -504,12 +544,10 @@ SideScroller.Game.prototype = {
         this.but_continue.visible = true;
         this.but_mapa.visible = true;
         
-   },
+        },
     
     unpause: function(){
         
-        
-            
         if (this.game.paused) {
             if (this.but_continue.getBounds().contains(this.game.input.x, this.game.input.y)) {
                     if (this.end == true){
@@ -537,13 +575,8 @@ SideScroller.Game.prototype = {
             
             }
         
-    },
-        destroyEmitter: function(){
-            //this.emitter.destroy();
-            //this.powerEmitter.destroy();
             },
     
-    // Restart the game
         restartGame: function() {
             this.state.start('Game');
             },
@@ -551,9 +584,6 @@ SideScroller.Game.prototype = {
         gotoMainQuiz: function() {
             this.state.start('MainQuiz');
             }
-    
-    
-
     
 };
 

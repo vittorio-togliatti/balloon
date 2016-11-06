@@ -17,14 +17,14 @@ SideScroller.Menu.prototype = {
     //this.bkg.height = 360;
     //this.bkg.width = 640;
     
-    this.but_play = this.game.add.sprite(-200, 190, 'btn_jugar',0);
+    this.but_play = this.game.add.sprite(260, 400, 'btn_jugar',0);
     this.but_play.inputEnabled = true;
-    this.but_play.events.onInputDown.add(this.gotEstadoVideo, this);
-    var tween = this.game.add.tween(this.but_play).to( { x: 260 }, 1800, Phaser.Easing.Bounce.Out, true);
+    this.but_play.events.onInputDown.add(this.gotoEstadoVideo, this);
+    var tween = this.game.add.tween(this.but_play).to( { y: 190 }, 1000, Phaser.Easing.Cubic.Out, true);
       
-    this.game.time.events.add(100, this.inExtras, this);
+    this.game.time.events.add(200, this.inExtras, this);
       
-    this.game.time.events.add(200, this.inCredits, this);
+    this.game.time.events.add(400, this.inCredits, this);
       
     this.game.time.events.add(400, this.inLogo, this);
     
@@ -38,22 +38,26 @@ SideScroller.Menu.prototype = {
         
     },
     
-  gotEstadoVideo: function() {
+  gotoEstadoVideo: function() {
         this.state.start('Mapa');
         },
     
+  gotoEstadoCredits: function() {
+        this.state.start('Credits');
+        },
+    
   inExtras: function() {
-        this.but_extras = this.game.add.sprite(-200, 235, 'btn_extras',0);
+        this.but_extras = this.game.add.sprite(260, 400, 'btn_extras',0);
         this.but_extras.inputEnabled = true;
-        this.but_extras.events.onInputDown.add(this.gotEstadoVideo, this);
-        var tween = this.game.add.tween(this.but_extras).to( { x: 260 }, 1800, Phaser.Easing.Cubic.Out, true);
+        this.but_extras.events.onInputDown.add(this.gotoEstadoVideo, this);
+        var tween = this.game.add.tween(this.but_extras).to( { y: 235 }, 1000, Phaser.Easing.Cubic.Out, true);
         },
     
   inCredits: function() {
-        this.but_creditos = this.game.add.sprite(-200, 280, 'btn_creditos',0);
+        this.but_creditos = this.game.add.sprite(260, 400, 'btn_creditos',0);
         this.but_creditos.inputEnabled = true;
-        this.but_creditos.events.onInputDown.add(this.gotEstadoVideo, this);
-        var tween = this.game.add.tween(this.but_creditos).to( { x: 260 }, 1800, Phaser.Easing.Cubic.Out, true);
+        this.but_creditos.events.onInputDown.add(this.gotoEstadoCredits, this);
+        var tween = this.game.add.tween(this.but_creditos).to( { y: 280 }, 1000, Phaser.Easing.Cubic.Out, true);
         },
     
   inLogo: function() {

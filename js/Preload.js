@@ -41,7 +41,8 @@ SideScroller.Preload.prototype = {
     this.load.spritesheet('intro_pinguino', 'img/portada_menu/pingu_tiles_118.png', 118, 122, 11);
       
       
-    //Video
+    //Credits
+    this.load.image('credits', 'img/creditos/creditos.png');
     
       
       
@@ -70,7 +71,7 @@ SideScroller.Preload.prototype = {
     this.load.image('ruta_5', 'img/mapa/mapa_ruta5.png');
     this.load.image('ruta_6', 'img/mapa/mapa_ruta6.png');
       
-      
+    this.load.image('atras_negro', 'img/common/btn_atras_negro.png');
       
  
     //this.load.tilemap('level1', 'assets/tilemaps/level1.json', null, Phaser.Tilemap.TILED_JSON);
@@ -113,21 +114,25 @@ SideScroller.Preload.prototype = {
     this.load.image('bkg_europa_bk', 'img/europa/bkg_europa_back_1024.png');
     this.load.image('bkg_europa_mid', 'img/europa/bkg_europa_middle_1024.png');
     this.load.image('bkg_europa_fr', 'img/europa/bkg_europa_front_2048x2048.png');
+    this.load.spritesheet('sheet_nuclear', 'img/europa/sheet_nuclear.png', 100, 124, 9);
       
     //Africa
     this.load.image('bkg_africa_bk', 'img/africa/bkg_africa_back_1024.png');
     this.load.image('bkg_africa_mid', 'img/africa/bkg_africa_middle_1024.png');
     this.load.image('bkg_africa_fr', 'img/africa/bkg_africa_front_2048x2048.png');
+    this.load.spritesheet('sheet_choza', 'img/africa/sheet_choza.png', 98, 47, 2);
       
     //Asia
     this.load.image('bkg_asia_bk', 'img/asia/bkg_asia_back_1024.png');
     this.load.image('bkg_asia_mid', 'img/asia/bkg_asia_middle_1024.png');
     this.load.image('bkg_asia_fr', 'img/asia/bkg_asia_front_2048x2048.png');
+    this.load.spritesheet('sheet_escuela', 'img/asia/sheet_escuela.png', 120, 69, 2);
       
     //Oceania
     this.load.image('bkg_oceania_bk', 'img/oceania/bkg_oceania_back_1024.png');
     this.load.image('bkg_oceania_mid', 'img/oceania/bkg_oceania_middle_1024.png');
     this.load.image('bkg_oceania_fr', 'img/oceania/bkg_oceania_front_2048x2048.png');
+    this.load.spritesheet('sheet_mar', 'img/oceania/sheet_mar.png', 96, 35, 2);
     
       
     
@@ -139,8 +144,10 @@ SideScroller.Preload.prototype = {
     //common  
     this.load.image('grua', 'img/common/grua2.png');
     this.load.image('arbolesSecos', 'img/common/arboles_secos.png');
+    this.load.spritesheet('sheet_arbol_gran', 'img/common/arbol_gran.png', 14, 32, 2);
+    this.load.spritesheet('sheet_arbol_peque', 'img/common/arbol_peque.png', 10, 15, 2);
     this.game.load.physics("sprite_physics", "balloon.json");
-    //this.game.load.physics("sprite_physics_avion", "img/avion.json");
+    
       
       
     //objetos en el aire
