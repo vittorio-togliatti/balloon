@@ -39,7 +39,7 @@ SideScroller.Menu.prototype = {
     },
     
   gotoEstadoVideo: function() {
-        this.state.start('Mapa');
+        this.state.start('Video');
         },
     
   gotoEstadoCredits: function() {

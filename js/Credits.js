@@ -10,13 +10,14 @@ SideScroller.Credits.prototype = {
     },
  
   create: function() {
-    var credits = this.game.add.sprite(0, 0,  'credits');
+    this.game.stage.backgroundColor = '#FFFFFF';
+    var credits = this.game.add.sprite(0, 360,  'credits');
       
     var atras = this.game.add.sprite(550, 320,  'atras_negro');
     atras.inputEnabled = true;
     atras.events.onInputDown.add(this.gotoEstadoMenu, this);
       
-    var tween = this.game.add.tween(credits).to( { y: -400 }, 15000,  "Linear", true);
+    var tween = this.game.add.tween(credits).to( { y: -900 }, 30000,  "Linear", true);
     tween.onComplete.add(this.gotoEstadoMenu, this);
     }, 
  

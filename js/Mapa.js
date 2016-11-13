@@ -6,12 +6,36 @@ SideScroller.Mapa = function() {};
 SideScroller.Mapa.prototype = {
  
   preload: function(){
-        
+        var objetivosNivelJson = '{"objetivos":[{"objetivo":1,"nivel":4},{"objetivo":2,"nivel":4},{"objetivo":3,"nivel":2},{"objetivo":4,"nivel":5},{"objetivo":5,"nivel":5},{"objetivo":6,"nivel":2},{"objetivo":7,"nivel":3},{"objetivo":8,"nivel":1},{"objetivo":9,"nivel":1},{"objetivo":10,"nivel":5},{"objetivo":11,"nivel":3},{"objetivo":12,"nivel":3},{"objetivo":13,"nivel":7},{"objetivo":14,"nivel":6},{"objetivo":15,"nivel":6},{"objetivo":16,"nivel":7},{"objetivo":17,"nivel":7}]}';
+      
+      this.objetivosNivelJson = JSON.parse(objetivosNivelJson);
     },
  
   create: function() {
     this.game.world.setBounds(0, 0, windowWidth, windowHeight);
     this.game.stage.backgroundColor = '#000000';
+      
+    this.nivel = localStorage.getItem('nivel');
+    this.nivel = this.nivel*1;
+    
+      //**** !!!!!!!!!!!!!  ******
+      //this.nivel = 6;
+      
+      for (i=0; i<17; i++){
+          var numobjetivo = "obj_" + i;
+          
+          //alert(this.objetivosNivelJson.objetivos[i].nivel);
+          
+          if (this.objetivosNivelJson.objetivos[i].nivel <= this.nivel){
+              this.numobjetivo = this.game.add.sprite(5 + (37 * i), 321, 'tile_iconos_objetivos',i);
+          } else {
+              this.numobjetivo = this.game.add.sprite(5 + (37 * i), 321, 'tile_iconos_objetivos',17);
+          }
+          
+          
+      }
+    
+    //this.obj_2 = this.game.add.sprite(47, 300, 'tile_iconos_objetivos',1);
       
     this.bkg = this.game.add.sprite(0, 0,  'mapa_completo');
     this.norteamerica = this.game.add.sprite(65, 6,  'norteamerica_gris');
@@ -22,26 +46,26 @@ SideScroller.Mapa.prototype = {
     this.oceania = this.game.add.sprite(494, 125,  'oceania_gris');
     this.antartida = this.game.add.sprite(117, 278,  'antartida_gris');
     
-    var but_nortamerica_x = 115;
-    var but_nortamerica_y = 67;
+    var but_nortamerica_x = 110;
+    var but_nortamerica_y = 62;
       
-    var but_sudamerica_x = 188;
-    var but_sudamerica_y = 180;
+    var but_sudamerica_x = 182;
+    var but_sudamerica_y = 173;
       
-    var but_europa_x = 303;
-    var but_europa_y = 63;
+    var but_europa_x = 298;
+    var but_europa_y = 58;
       
-    var but_africa_x = 346;
-    var but_africa_y = 143;
+    var but_africa_x = 340;
+    var but_africa_y = 136;
       
-    var but_asia_x = 450;
-    var but_asia_y = 78;
+    var but_asia_x = 443;
+    var but_asia_y = 71;
       
-    var but_oceania_x = 535;
+    var but_oceania_x = 532;
     var but_oceania_y = 200;
       
-    var but_antartida_x = 382;
-    var but_antartida_y = 290;
+    var but_antartida_x = 377;
+    var but_antartida_y = 287;
       
     var ruta1_x = 120;
     var ruta1_y = 75;
@@ -62,15 +86,18 @@ SideScroller.Mapa.prototype = {
     var ruta6_y = 205;
     
       
-    this.nivel = localStorage.getItem('nivel');
-    this.nivel = this.nivel*1;
-    //alert(nivel);
+   
     var boton_play;
       
     if (this.nivel == null) {
         this.nivel = 0;
         localStorage.setItem('nivel',this.nivel);
     }
+      
+      if (this.nivel > 6){//Finish
+            this.antartida = this.game.add.sprite(117, 278,  'antartida_col');
+           var butt6 =  this.game.add.sprite(but_antartida_x, but_antartida_y, 'ss_botones', 1);
+      }   
     
       if (this.nivel > 5){//Antartida
             this.oceania = this.game.add.sprite(494, 125,  'oceania_col');
@@ -134,6 +161,9 @@ SideScroller.Mapa.prototype = {
             case 6://Antartida
                 boton_play = this.game.add.sprite(but_antartida_x, but_antartida_y, 'ss_botones');
                 break;
+            case 7://Antartida
+                boton_play = this.game.add.sprite(but_antartida_x, but_antartida_y + 100, 'ss_botones');
+                break;
         }
     
     boton_play.animations.add('pulse');
@@ -141,6 +171,9 @@ SideScroller.Mapa.prototype = {
     boton_play.inputEnabled = true;
     boton_play.events.onInputDown.add(this.gotoGame, this); 
       
+    var boton_atras = this.game.add.sprite(570, 275, 'atras_negro');
+    boton_atras.inputEnabled = true;
+    boton_atras.events.onInputDown.add(this.gotoMenu, this); 
     }, 
  
   update: function() {
@@ -152,13 +185,17 @@ SideScroller.Mapa.prototype = {
     },
     
   gotoGame: function() {
-      if (this.nivel == 6){
-           this.state.start('QuizFinal');
-      } else {
-           this.state.start('Game');
-      }
+          if (this.nivel == 6){
+               this.state.start('QuizFinal');
+          } else {
+               this.state.start('Game');
+          }
        
-        }
+    },
+ 
+  gotoMenu: function(){
+        this.state.start('Menu');
+    }
     
 };
 

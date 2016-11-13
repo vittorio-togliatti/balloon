@@ -39,7 +39,7 @@ var currentScaleFactor = windowHeight / originalHeight;
     windowHeight = originalHeight;
     windowWidth = windowWidth / currentScaleFactor;
    
-SideScroller.game = new Phaser.Game(windowWidth, windowHeight, Phaser.AUTO, '');
+SideScroller.game = new Phaser.Game(windowWidth, windowHeight, Phaser.AUTO, '','','',false,'');
  
 SideScroller.game.state.add('Boot', SideScroller.Boot);
 SideScroller.game.state.add('Preload', SideScroller.Preload);

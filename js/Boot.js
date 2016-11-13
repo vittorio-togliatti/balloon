@@ -15,7 +15,8 @@ SideScroller.Boot.prototype = {
   },
  
   create: function() {
-    
+    //this.nivel = 7;
+    //localStorage.setItem('nivel',this.nivel);
     this.game.stage.backgroundColor = '#C9C9C9';
  
     //scaling options

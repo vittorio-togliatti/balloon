@@ -11,11 +11,17 @@ SideScroller.Preload.prototype = {
     //show loading screen
     this.bkg = this.game.add.sprite(0, 0,  'preloadbkg');
    
-    this.preloadBar = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'preloadbar');
+    //this.preloadBar = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'preloadbar');
+      
+    this.preloadBar = this.add.sprite(this.game.world.centerX-53, this.game.world.centerY-10, 'preloadbar');
  
-    this.preloadBar.anchor.setTo(0.5);
+    this.preloadBar.anchor.setTo(0.0);
  
-    this.preloadBar.scale.setTo(3);
+    this.preloadBar.scale.setTo(2.1,2.7);
+ 
+    //this.preloadBar.anchor.setTo(0.5);
+ 
+    //this.preloadBar.scale.setTo(3);
  
     this.load.setPreloadSprite(this.preloadBar);
       
@@ -31,6 +37,10 @@ SideScroller.Preload.prototype = {
  
     //load game assets
       
+    //common
+    this.load.image('start_play', 'img/common/btn_play.png');
+    this.load.image('atras_negro', 'img/common/btn_atras_negro.png');
+      
     //Portada
     this.load.image('portada', 'img/portada_menu/portada_bkg.png');
     this.load.spritesheet('btn_jugar', 'img/portada_menu/btn_jugar.png', 150, 38, 2);
@@ -40,14 +50,23 @@ SideScroller.Preload.prototype = {
     this.load.spritesheet('btn_creditos', 'img/portada_menu/pingu_tiles_118.png', 150, 38, 2);
     this.load.spritesheet('intro_pinguino', 'img/portada_menu/pingu_tiles_118.png', 118, 122, 11);
       
-      
+    
+    //Intro  
+    this.load.image('img_intro', 'img/intro/intro_fondo.png');
+    this.load.image('img_saltarintro', 'img/video/btn_saltarintro.png');
+    this.load.spritesheet('sheet_intro_runtalk', 'img/intro/intro_nens_runtalk.png', 426, 128, 4);
+    this.load.spritesheet('sheet_intro_textos', 'img/intro/intro_textos.png', 570, 120, 5);
+    this.load.spritesheet('sheet_intro_globo', 'img/intro/intro_sheet_globo.png', 340, 562, 2);
+    
     //Credits
     this.load.image('credits', 'img/creditos/creditos.png');
     
       
       
     //Mapa
-    this.load.spritesheet('ss_botones', 'img/mapa/btn_target.png', 19, 19, 3);
+    this.load.spritesheet('ss_botones', 'img/mapa/btn_target.png', 32, 32, 3);
+    this.load.spritesheet('tile_iconos_objetivos', 'img/mapa/barra_iconos.png', 37, 37, 18);
+      
     this.load.image('mapa_completo', 'img/mapa/mapa_mar_costas.png');
     this.load.image('norteamerica_col', 'img/mapa/mapa_norteamerica_col.png');
     this.load.image('norteamerica_gris', 'img/mapa/mapa_norteamerica_gris.png');
@@ -71,10 +90,9 @@ SideScroller.Preload.prototype = {
     this.load.image('ruta_5', 'img/mapa/mapa_ruta5.png');
     this.load.image('ruta_6', 'img/mapa/mapa_ruta6.png');
       
-    this.load.image('atras_negro', 'img/common/btn_atras_negro.png');
+    
       
  
-    //this.load.tilemap('level1', 'assets/tilemaps/level1.json', null, Phaser.Tilemap.TILED_JSON);
       
     //Game
     this.load.audio('explosion', 'audio/explosion.ogg');
@@ -178,9 +196,12 @@ SideScroller.Preload.prototype = {
     this.load.image('pregunta10', 'img/preguntas/preg10.png');
     this.load.image('pregunta11', 'img/preguntas/preg11.png');
     this.load.image('pregunta12', 'img/preguntas/preg12.png');
-    this.load.image('pregunta13', 'img/preguntas/preg13.png');
+    //this.load.image('pregunta13', 'img/preguntas/preg13.png');
     this.load.image('pregunta14', 'img/preguntas/preg14.png');
     this.load.image('pregunta15', 'img/preguntas/preg15.png');
+    
+    //Antartida
+    this.load.image('info_antartida', 'img/common/info_antartida.png');
       
     this.load.image('preg_ant_13', 'img/preguntas/ant_preg13.png');
     this.load.image('preg_ant_16', 'img/preguntas/ant_preg16.png');
@@ -190,6 +211,10 @@ SideScroller.Preload.prototype = {
     this.load.image('preg_ant_20', 'img/preguntas/ant_preg20.png');
     this.load.image('preg_ant_21', 'img/preguntas/ant_preg21.png');
     this.load.image('preg_ant_22', 'img/preguntas/ant_preg22.png');
+      
+    this.load.spritesheet('pinguino_antartida', 'img/preguntas/sheet_pingu_hunde.png', 640, 92, 2);
+    this.load.image('mar_antartida', 'img/preguntas/ant_mar.png');
+    this.load.image('info_dead', 'img/common/info_dead.png');
     
     
    
