@@ -23,7 +23,7 @@ SideScroller.QuizFinal.prototype = {
       
     this.img_info_antartida = this.game.add.sprite(0, 0, "info_antartida");
       
-    this.btn_start = this.game.add.sprite(550, 300, "start_play");
+    this.btn_start = this.game.add.sprite(550, 290, "start_play",0);
     this.btn_start.inputEnabled = true;
     this.btn_start.events.onInputDown.add(this.startLevel, this);
       

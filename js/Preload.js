@@ -38,7 +38,7 @@ SideScroller.Preload.prototype = {
     //load game assets
       
     //common
-    this.load.image('start_play', 'img/common/btn_play.png');
+    this.load.spritesheet('start_play', 'img/common/btn_play.png', 36, 38, 2);
     this.load.image('atras_negro', 'img/common/btn_atras_negro.png');
       
     //Portada
@@ -47,7 +47,7 @@ SideScroller.Preload.prototype = {
     this.load.spritesheet('btn_extras', 'img/portada_menu/btn_contenidoextra.png', 150, 38, 2);
     this.load.spritesheet('btn_creditos', 'img/portada_menu/btn_creditos.png', 150, 38, 2);
     this.load.image('portada_logo', 'img/portada_menu/portada_logo.png');
-    this.load.spritesheet('btn_creditos', 'img/portada_menu/pingu_tiles_118.png', 150, 38, 2);
+    //this.load.spritesheet('btn_creditos', 'img/portada_menu/pingu_tiles_118.png', 150, 38, 2);
     this.load.spritesheet('intro_pinguino', 'img/portada_menu/pingu_tiles_118.png', 118, 122, 11);
       
     
