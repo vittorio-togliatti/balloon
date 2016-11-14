@@ -64,6 +64,7 @@ SideScroller.Preload.prototype = {
       
       
     //Mapa
+    this.load.image('atras_blanco', 'img/mapa/btn_atras.png'); 
     this.load.spritesheet('ss_botones', 'img/mapa/btn_target.png', 32, 32, 3);
     this.load.spritesheet('tile_iconos_objetivos', 'img/mapa/barra_iconos.png', 37, 37, 18);
       
@@ -90,9 +91,28 @@ SideScroller.Preload.prototype = {
     this.load.image('ruta_5', 'img/mapa/mapa_ruta5.png');
     this.load.image('ruta_6', 'img/mapa/mapa_ruta6.png');
       
-    
+//      for (i=1;i<=17;i++){
+//          this.load.image('img_objetivo_' + i, 'img/mapa/info_obj' + i + '.png');
+//      }
+      this.load.image('img_objetivo_1', 'img/mapa/info_obj1.png');
+       this.load.image('img_objetivo_2', 'img/mapa/info_obj2.png');
+       this.load.image('img_objetivo_3', 'img/mapa/info_obj3.png');
+       this.load.image('img_objetivo_4', 'img/mapa/info_obj4.png');
+       this.load.image('img_objetivo_5', 'img/mapa/info_obj5.png');
+       this.load.image('img_objetivo_6', 'img/mapa/info_obj6.png');
+       this.load.image('img_objetivo_7', 'img/mapa/info_obj7.png');
+       this.load.image('img_objetivo_8', 'img/mapa/info_obj8.png');
+       this.load.image('img_objetivo_9', 'img/mapa/info_obj9.png');
+       this.load.image('img_objetivo_10', 'img/mapa/info_obj10.png');
+       this.load.image('img_objetivo_11', 'img/mapa/info_obj11.png');
+       this.load.image('img_objetivo_12', 'img/mapa/info_obj12.png');
+       this.load.image('img_objetivo_13', 'img/mapa/info_obj13.png');
+       this.load.image('img_objetivo_14', 'img/mapa/info_obj14.png');
+      this.load.image('img_objetivo_15', 'img/mapa/info_obj15.png');
+      this.load.image('img_objetivo_16', 'img/mapa/info_obj16.png');
+      this.load.image('img_objetivo_17', 'img/mapa/info_obj17.png');
       
- 
+      
       
     //Game
     this.load.audio('explosion', 'audio/explosion.ogg');

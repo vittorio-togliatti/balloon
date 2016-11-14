@@ -175,7 +175,7 @@ SideScroller.Game.prototype = {
     this.secondObjects = this.game.add.group();
       
     //Elementos de juego
-    this.boton_pausa = this.game.add.sprite(580, 20, 'btn_pausa');
+    this.boton_pausa = this.game.add.sprite(608, 4, 'btn_pausa');
     this.boton_pausa.inputEnabled = true;
     this.boton_pausa.events.onInputDown.add(this.gotoPausa, this);
       
@@ -229,7 +229,7 @@ SideScroller.Game.prototype = {
         this.player.body.velocity.y = 0;
       
       // si el globo sale de abajo se acabó
-        if (this.player.y > windowHeight - 72) {
+        if (this.player.y > windowHeight - 69) {
             
             this.player.body.velocity.y = 0;
             this.player.body.velocity.x = 0; 
@@ -519,7 +519,7 @@ SideScroller.Game.prototype = {
     
    checkGround: function(paquete) {
        
-             if (paquete.y > (windowHeight - 37)){
+             if (paquete.y > (windowHeight - 39)){
                   paquete.body.velocity.y = 0;
                   paquete.body.velocity.x = groundObjectsSpeed;
                  paquete.body.data.gravityScale = 0;

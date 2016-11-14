@@ -11,15 +11,15 @@ SideScroller.Video.prototype = {
  
   create: function() {
     //Parametrizacion en millisegundos
-    this.params = {"tiempoEntradaNinos":3000,
-                   "tiempoHablado1":1000,
-                   "tiempoHablado2":1000,
-                   "tiempoHablado3":1000,
-                   "tiempoHablado4":1000,
-                   "tiempoHablado5":1000,
+    this.params = {"tiempoEntradaNinos":4000,
+                   "tiempoHablado1":7000,
+                   "tiempoHablado2":7000,
+                   "tiempoHablado3":7000,
+                   "tiempoHablado4":5000,
+                   "tiempoHablado5":5000,
                    "tiempoSalidaNinos":3000,
                    "tiempoEntradaGlobo":3000,
-                   "tiempoSubidaGlobo":2000
+                   "tiempoSubidaGlobo":4000
                   }
     //Fin Parametrizacion
     

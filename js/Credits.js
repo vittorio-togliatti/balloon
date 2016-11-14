@@ -13,7 +13,7 @@ SideScroller.Credits.prototype = {
     this.game.stage.backgroundColor = '#FFFFFF';
     var credits = this.game.add.sprite(0, 360,  'credits');
       
-    var atras = this.game.add.sprite(550, 320,  'atras_negro');
+    var atras = this.game.add.sprite(10, 320,  'atras_negro');
     atras.inputEnabled = true;
     atras.events.onInputDown.add(this.gotoEstadoMenu, this);
       

@@ -153,7 +153,7 @@ SideScroller.QuizFinal.prototype = {
     this.anim_pingu_antartida.play(10, true);
       
     this.mar_antartida = this.game.add.sprite(0, 370, "mar_antartida");
-    var tween = this.game.add.tween(this.mar_antartida).to( { y: 268 }, 10000, Phaser.Easing.Cubic.Out, true);
+    var tween = this.game.add.tween(this.mar_antartida).to( { y: 268 }, 30000, Phaser.Easing.Cubic.Out, true);
     tween.onComplete.add(this.gotoError, this); 
         
     }

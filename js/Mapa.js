@@ -22,15 +22,19 @@ SideScroller.Mapa.prototype = {
       //this.nivel = 6;
       
       for (i=0; i<17; i++){
-          var numobjetivo = "obj_" + i;
+        //var numobjetivo = "obj_" + i;
           
-          //alert(this.objetivosNivelJson.objetivos[i].nivel);
+        //alert(this.objetivosNivelJson.objetivos[i].nivel);
           
-          if (this.objetivosNivelJson.objetivos[i].nivel <= this.nivel){
-              this.numobjetivo = this.game.add.sprite(5 + (37 * i), 321, 'tile_iconos_objetivos',i);
-          } else {
-              this.numobjetivo = this.game.add.sprite(5 + (37 * i), 321, 'tile_iconos_objetivos',17);
-          }
+        if (this.objetivosNivelJson.objetivos[i].nivel <= this.nivel){//Coloreado
+            
+            var numobjetivo=this.game.add.sprite(5+(37*i),321,'tile_iconos_objetivos',i);
+            numobjetivo.indice = i+1;
+            numobjetivo.inputEnabled = true;
+            numobjetivo.events.onInputDown.add(this.showObjetivo, this);
+        } else {//Gris
+            this.obj_18=this.game.add.sprite(5+(37*i),321,'tile_iconos_objetivos',17);
+        }
           
           
       }
@@ -171,9 +175,9 @@ SideScroller.Mapa.prototype = {
     boton_play.inputEnabled = true;
     boton_play.events.onInputDown.add(this.gotoGame, this); 
       
-    var boton_atras = this.game.add.sprite(570, 275, 'atras_negro');
-    boton_atras.inputEnabled = true;
-    boton_atras.events.onInputDown.add(this.gotoMenu, this); 
+    this.boton_atras = this.game.add.sprite(10, 0, 'atras_blanco');
+    this.boton_atras.inputEnabled = true;
+    this.boton_atras.events.onInputDown.add(this.gotoMenu, this); 
     }, 
  
   update: function() {
@@ -195,6 +199,27 @@ SideScroller.Mapa.prototype = {
  
   gotoMenu: function(){
         this.state.start('Menu');
+    },
+ 
+  showObjetivo: function(button){
+      if (this.img_objetivo){
+          this.img_objetivo.kill();
+      }
+      
+      
+      this.img_objetivo=this.game.add.sprite(0,0,'img_objetivo_' + button.indice);
+      this.boton_atras.kill();
+      this.boton_atras = this.game.add.sprite(10, 0, 'atras_blanco');
+      this.boton_atras.inputEnabled = true;
+      this.boton_atras.events.onInputDown.add(this.killObjetivo,this);
+    },
+ 
+  killObjetivo: function(){
+      this.img_objetivo.kill();
+      this.boton_atras.kill();
+      this.boton_atras = this.game.add.sprite(10, 0, 'atras_blanco');
+      this.boton_atras.inputEnabled = true;
+      this.boton_atras.events.onInputDown.add(this.gotoMenu, this);
     }
     
 };
