@@ -13,7 +13,7 @@ SideScroller.Preload.prototype = {
    
     //this.preloadBar = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'preloadbar');
       
-    this.preloadBar = this.add.sprite(this.game.world.centerX-50, this.game.world.centerY-10, 'preloadbar');
+    this.preloadBar = this.add.sprite(this.game.world.centerX-51, this.game.world.centerY-10, 'preloadbar');
  
     this.preloadBar.anchor.setTo(0.0);
  
