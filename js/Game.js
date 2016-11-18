@@ -115,6 +115,14 @@ SideScroller.Game.prototype = {
         this.firstObjectSheetName = "sheet_nuclear"
         this.firstObjectColorFrame =3;
         this.firstObjectY = 94;
+        this.probabilidadesObjetos = 
+                  {"arboles1":3,
+                   "coches1":8,
+                   "arboles2":11,
+                   "objetoPrincipalNivel":13,
+                   "coches2":17,
+                   "Gruas":20
+                  }
         break;
             
         case 3://Africa 
