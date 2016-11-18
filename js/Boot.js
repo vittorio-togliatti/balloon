@@ -32,9 +32,21 @@ SideScroller.Boot.prototype = {
     // Set the gravity
     this.game.physics.p2.gravity.y = gravity_value;
       
+    
+    this.game.scale.pageAlignVertically = true;
+    this.game.scale.pageAlignHorizontally = true;
+    this.game.scale.setShowAll();
+    this.game.scale.refresh();
       
     //start full screen
     this.game.scale.startFullScreen(false);
+      
+    this.game.scale.pageAlignVertically = true;
+    this.game.scale.pageAlignHorizontally = true;
+    this.game.scale.setShowAll();
+    this.game.scale.refresh();
+      
+    // this.game.scale.pageAlignHorizontally = true;
  
     this.state.start('Preload');
  

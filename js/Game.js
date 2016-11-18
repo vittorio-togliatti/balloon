@@ -11,19 +11,18 @@ SideScroller.Game.prototype = {
       
       var item = localStorage.getItem('gameData');
       this.dataObj = item;
-      //alert(this.dataObj);
     },
  
   create: function() {
       
     //*******  variables customización *******//
-    this.powerUpLevelMax = 3;
-    this.MINIMUM_SWIPE_LENGTH = 30;
+    this.powerUpLevelMax = 14;//Max 14
+    
     
       
     //***********  end customize ************//
       
-      
+    this.MINIMUM_SWIPE_LENGTH = 30;
     this.end=false;
     this.onGround=false;
     this.powerup = 0;
@@ -38,6 +37,8 @@ SideScroller.Game.prototype = {
     this.audio_shoot  = this.add.audio('shoot');
     this.audio_goal  = this.add.audio('goal');
     this.audio_up  = this.add.audio('up');
+    this.powerUpAudio = this.add.audio('audio_powerup');
+    this.clicAudio = this.add.audio('audio_button');
       
     
     //  Create collision groups
@@ -50,8 +51,18 @@ SideScroller.Game.prototype = {
     this.helicopterosCollisionGroup = this.game.physics.p2.createCollisionGroup();
       
     this.firstObjectX = 800;
-    this.secondObjectSheetName = "sheet_arbol_gran";
-    this.secondObjectY = 47;
+      
+    this.arbolGranSheetName = "sheet_arbol_gran";
+    this.arbolGranY = 48;
+      
+    this.arbolPequeSheetName = "sheet_arbol_peque";
+    this.arbolPequeY = 40;
+      
+    this.cochePequeSheetName = "sheet_coche_peque";
+    this.cochePequeY = 38;
+      
+    this.cocheGranSheetName = "sheet_coche_gran";
+    this.cocheGranY = 38;
       
     //Parametrizacion Continentes
     switch(this.nivel) {
@@ -65,6 +76,14 @@ SideScroller.Game.prototype = {
         this.firstObjectColorFrame = 3;
         this.firstObjectX = 800;
         this.firstObjectY = 96;
+        this.probabilidadesObjetos = 
+                  {"arboles1":3,
+                   "coches1":8,
+                   "arboles2":11,
+                   "objetoPrincipalNivel":13,
+                   "coches2":17,
+                   "Gruas":20
+                  }
         break;
             
         case 1://SudAmerica 
@@ -76,6 +95,14 @@ SideScroller.Game.prototype = {
         this.firstObjectSheetName = "sheet_hospital"
         this.firstObjectColorFrame = 1;
         this.firstObjectY = 64;
+        this.probabilidadesObjetos = 
+                  {"arboles1":3,
+                   "coches1":8,
+                   "arboles2":11,
+                   "objetoPrincipalNivel":13,
+                   "coches2":17,
+                   "Gruas":20
+                  }
         break;
             
         case 2://Europa 
@@ -100,6 +127,14 @@ SideScroller.Game.prototype = {
         this.firstObjectHasSecondAnimation = false;
         this.firstObjectColorFrame =1;
         this.firstObjectY = 57;
+        this.probabilidadesObjetos = 
+                  {"arboles1":3,
+                   "coches1":8,
+                   "arboles2":11,
+                   "objetoPrincipalNivel":13,
+                   "coches2":17,
+                   "Gruas":20
+                  }
         break;
             
         case 4://Asia
@@ -112,6 +147,14 @@ SideScroller.Game.prototype = {
         this.firstObjectColorFrame =1;
         this.firstObjectX = 800;
         this.firstObjectY = 67;
+        this.probabilidadesObjetos = 
+                  {"arboles1":3,
+                   "coches1":8,
+                   "arboles2":11,
+                   "objetoPrincipalNivel":13,
+                   "coches2":17,
+                   "Gruas":20
+                  }
         break;
             
         case 5://Oceania 
@@ -123,6 +166,16 @@ SideScroller.Game.prototype = {
         this.firstObjectSheetName = "sheet_mar"
         this.firstObjectColorFrame =1;
         this.firstObjectY = 20;
+        this.probabilidadesObjetos = 
+                  {"arboles1":3,
+                   "coches1":8,
+                   "arboles2":11,
+                   "objetoPrincipalNivel":13,
+                   "coches2":17,
+                   "Gruas":20,
+                   "aviones":5,
+                   "helicopteros":10
+                  }
         break;
       }
     
@@ -218,7 +271,9 @@ SideScroller.Game.prototype = {
       if (this.end == false) {
         if (this.input.activePointer.isDown  && (this.player.body.velocity.y > -140)){
             this.player.body.velocity.y -= vertical_acceleration; 
+            
             this.anim_acelera_globo.play(5, true);
+            
         } else{
             this.player.body.sprite.loadTexture('tile_globo',0);
         }
@@ -303,8 +358,8 @@ SideScroller.Game.prototype = {
 
             },
     
-    addSecondObject: function(x, y) {
-        var secondObject = this.secondObjects.create(x, y, this.secondObjectSheetName,0);
+    addSecondObject: function(x, y, sheetName) {
+        var secondObject = this.secondObjects.create(x, y, sheetName,0);
         this.game.physics.p2.enable([secondObject], false);
         
         secondObject.body.fixedRotation = true;
@@ -320,6 +375,7 @@ SideScroller.Game.prototype = {
         secondObject.checkWorldBounds = true;
         secondObject.outOfBoundsKill = true;
         secondObject.isSecondObject = true;
+        secondObject.sheetName = sheetName;
       
     },
     
@@ -405,17 +461,37 @@ SideScroller.Game.prototype = {
             },
     
     addObjectsOnFloor: function() {
-        var hole = Math.floor(Math.random() * 10) + 1;
+        var hole = Math.floor(Math.random() * 20) + 1;
         
-        if (hole < 2 ){
-            this.addSecondObject(this.firstObjectX + 40, this.game.height - this.secondObjectY);
-            this.addSecondObject(this.firstObjectX + 15, this.game.height - this.secondObjectY);
-            this.addSecondObject(this.firstObjectX, this.game.height - this.secondObjectY);
-            } else if(hole < 4){
+        if (hole <= this.probabilidadesObjetos.arboles1 ){
+            
+            this.addSecondObject(this.firstObjectX,this.game.height-this.arbolGranY ,this.arbolGranSheetName);
+             this.addSecondObject(this.firstObjectX+40,this.game.height-this.arbolGranY ,this.arbolGranSheetName);
+             this.addSecondObject(this.firstObjectX+80,this.game.height-this.arbolGranY ,this.arbolGranSheetName);
+            this.addSecondObject(this.firstObjectX + 120, this.game.height - this.arbolPequeY, this.arbolPequeSheetName);
+            
+            } else if(hole <= this.probabilidadesObjetos.coches1){
+                
+                this.addSecondObject(this.firstObjectX, this.game.height - this.cocheGranY, this.cocheGranSheetName);
+                this.addSecondObject(this.firstObjectX + 40, this.game.height - this.cochePequeY, this.cochePequeSheetName);
+                this.addSecondObject(this.firstObjectX + 80, this.game.height - this.cochePequeY, this.cochePequeSheetName);
+                
+            }else if(hole <= this.probabilidadesObjetos.arboles2){
+                
+                this.addSecondObject(this.firstObjectX,this.game.height-this.arbolGranY ,this.arbolGranSheetName);
+             this.addSecondObject(this.firstObjectX+40,this.game.height-this.arbolGranY ,this.arbolGranSheetName);
+                this.addSecondObject(this.firstObjectX + 80, this.game.height - this.arbolPequeY, this.arbolPequeSheetName);
+                
+            } else if(hole <= this.probabilidadesObjetos.objetoPrincipalNivel){
+                
                 this.addFirstObject(this.firstObjectX, this.game.height - this.firstObjectY);
-            } else if(hole < 9){
-               this.addArboles(800, this.game.height - 63);
-            } else if(hole < 11){
+                
+            } else if(hole <= this.probabilidadesObjetos.coches2){
+                
+                this.addSecondObject(this.firstObjectX, this.game.height - this.cochePequeY, this.cochePequeSheetName);
+               this.addSecondObject(this.firstObjectX + 40, this.game.height - this.cocheGranY, this.cocheGranSheetName);
+                
+            } else if(hole <= this.probabilidadesObjetos.Gruas){
                  this.addGrua(800, this.game.height - 101);
             }else {
                //Res
@@ -450,12 +526,12 @@ SideScroller.Game.prototype = {
             paquete.body.velocity.y = this.player.body.velocity.y;
         }
 
-            },
+    },
     
     
     start_swipe:   function (pointer) {
     //"use strict";
-    //this.audio_fuego.play();
+    this.audio_up.play();
     this.start_swipe_point = new Phaser.Point(pointer.x, pointer.y);
             },
     
@@ -482,7 +558,7 @@ SideScroller.Game.prototype = {
             this.audio_goal.play();
            
            if (objetoColision.sprite.isSecondObject){
-                objetoColision.sprite.loadTexture(this.secondObjectSheetName, 1, false);
+                objetoColision.sprite.loadTexture(objetoColision.sprite.sheetName, 1, false);
            } else{
             
                if (this.firstObjectHasSecondAnimation){
@@ -507,7 +583,20 @@ SideScroller.Game.prototype = {
             this.barraEnergia.body.sprite.loadTexture('barra_energia', this.powerup);
            
            if (this.powerup == this.powerUpLevelMax){
-               this.gotoMainQuiz();
+               this.player.body.velocity.x = 0;
+               this.player.body.velocity.y = -30;
+               this.player.body.clearCollision(true, true);
+               this.player.body.data.gravityScale = 0;
+               this.end = true;
+            
+            
+               
+               //this.game.paused = true;
+               this.anim_barra = this.barraEnergia.animations.add('barra_energia');
+               this.anim_barra.play(5, true);
+               this.powerUpAudio.play();
+               
+               this.game.time.events.add(3000, this.gotoMainQuiz, this);
            }
            
        }
@@ -519,7 +608,7 @@ SideScroller.Game.prototype = {
     
    checkGround: function(paquete) {
        
-             if (paquete.y > (windowHeight - 39)){
+             if ((paquete.body) && (paquete.y > (windowHeight - 39))){
                   paquete.body.velocity.y = 0;
                   paquete.body.velocity.x = groundObjectsSpeed;
                  paquete.body.data.gravityScale = 0;
@@ -532,7 +621,7 @@ SideScroller.Game.prototype = {
             this.player.body.velocity.x = 0; 
             this.audio_collision.play();
             this.anim_desinfla_globo.play(5, true);
-            this.player.body.clearCollision(true, true)
+            this.player.body.clearCollision(true, true);
             
             this.end = true;
             } 

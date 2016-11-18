@@ -28,8 +28,33 @@ SideScroller.MainQuiz.prototype = {
     var preguntasJson = '{"continentes":[{"continente":[{"numPregunta":8,"respuesta":2},{"numPregunta":9,"respuesta":3}]},{ "continente":[{"numPregunta":3,"respuesta":2},{"numPregunta":6,"respuesta":3}]},{"continente":[{"numPregunta":7,"respuesta":1},{"numPregunta":11,"respuesta":3},{"numPregunta":12,"respuesta":3}]},{"continente":[{"numPregunta":1,"respuesta":3},{"numPregunta":2,"respuesta":1}]},{"continente":[{"numPregunta":4,"respuesta":1},{"numPregunta":5,"respuesta":3},{"numPregunta":10,"respuesta":1}]},{"continente":[{"numPregunta":14,"respuesta":2},{"numPregunta":15,"respuesta":3}]}]}';
       
     this.preguntasObject = JSON.parse(preguntasJson);
-      
-    //alert(preguntasObject.continentes[0].continente[0]); 
+    
+    switch(this.nivel) {
+            case 0://NordAmerica
+                this.outroSheet = "img_norteamerica_out";
+                break;
+            case 1://SudAmerica
+                this.outroSheet = "img_sudamerica_out";
+                break;
+            case 2://Europa
+                this.outroSheet = "img_europa_out";
+                break;
+            case 3://Africa
+                this.outroSheet = "img_africa_out";
+                break;
+            case 4://Asia
+                this.outroSheet = "img_asia_out";
+                break;
+            case 5://Oceania
+                this.outroSheet = "img_oceania_out";
+                break;
+            case 6://Antartida
+            
+                break;
+            case 7://Fin
+            
+                break;
+        }
     
     var numImgPreguntaActual = this.preguntasObject.continentes[this.nivel].continente[this.preguntaActual].numPregunta;
     var imgPreguntaActual = this.game.add.sprite(0, 0, "pregunta" + numImgPreguntaActual);
@@ -38,9 +63,7 @@ SideScroller.MainQuiz.prototype = {
     this.but_a = this.game.add.sprite(286, 151, "but_a");
     this.but_b = this.game.add.sprite(286, 209, "but_b");
     this.but_c = this.game.add.sprite(286, 265, "but_c");
-    this.but_a.inputEnabled = true;
-    this.but_b.inputEnabled = true;
-    this.but_c.inputEnabled = true;
+    this.enableButtons();
     this.but_a.events.onInputDown.add(this.click_a, this);
     this.but_b.events.onInputDown.add(this.click_b, this);
     this.but_c.events.onInputDown.add(this.click_c, this);
@@ -73,6 +96,8 @@ SideScroller.MainQuiz.prototype = {
     
   respuesta: function(button_pressed){
     var respuestaCorrecta = this.preguntasObject.continentes[this.nivel].continente[this.preguntaActual].respuesta;
+    
+    this.disableButtons();
       
       if (button_pressed == respuestaCorrecta){
           
@@ -99,11 +124,18 @@ SideScroller.MainQuiz.prototype = {
     },
 
     finalizarNivel: function(){
+        var img_congrats = this.game.add.sprite(0, 0, this.outroSheet);
+        
         this.preguntaActual = 0;
         this.nivel += 1;
         localStorage.setItem('nivel',this.nivel);
-        var img_congrats = this.game.add.sprite(0, 0, "info_congrats");
-        this.game.time.events.add(3000, this.gotoMapa, this);
+        
+        
+        var boton_start = this.game.add.sprite(584, 303, 'start_play',0);
+        boton_start.inputEnabled = true;
+        boton_start.events.onInputDown.add(this.gotoMapa, this); 
+        
+        //this.game.time.events.add(3000, this.gotoMapa, this);
     },
     
     restartMainQuiz: function(){
@@ -113,6 +145,18 @@ SideScroller.MainQuiz.prototype = {
     gotoMapa: function(){
         this.preguntaActual=0;
         this.state.start('Mapa');
+    },
+    
+    disableButtons: function(){
+        this.but_a.inputEnabled = false;
+        this.but_b.inputEnabled = false;
+        this.but_c.inputEnabled = false;
+    },
+    
+    enableButtons: function(){
+        this.but_a.inputEnabled = true;
+        this.but_b.inputEnabled = true;
+        this.but_c.inputEnabled = true;
     }
     
     

@@ -68,17 +68,17 @@ SideScroller.QuizFinal.prototype = {
           if (proximaPregunta != null){//Voy a la siguiente pregunta
               this.preguntaActual += 1;
               
-              this.game.time.events.add(1500, this.proximaPregunta, this);
+              this.game.time.events.add(1000, this.proximaPregunta, this);
               
           } else {//Cierro nivel
-              this.game.time.events.add(1500, this.finalizarJuego, this);
+              this.game.time.events.add(1000, this.finalizarJuego, this);
           }
           
           
           
       } else { //Vuelvo al juego
           this.wrong.play();
-          this.game.time.events.add(1500, this.gotoMapa, this);
+          this.game.time.events.add(1000, this.gotoMapa, this);
       }
       
     },
@@ -87,8 +87,13 @@ SideScroller.QuizFinal.prototype = {
         this.preguntaActual = 0;
         this.nivel = 7;
         localStorage.setItem('nivel',this.nivel);
-        var img_congrats = this.game.add.sprite(0, 0, "info_congrats");
-        this.game.time.events.add(3000, this.gotoMapa, this);
+        var img_congrats = this.game.add.sprite(0, 0, "img_antartida_out");
+        
+        var boton_start = this.game.add.sprite(584, 303, 'start_play',0);
+        boton_start.inputEnabled = true;
+        boton_start.events.onInputDown.add(this.gotoMapa, this); 
+        
+        //this.game.time.events.add(3000, this.gotoMapa, this);
     },
     
     proximaPregunta: function(){
@@ -153,7 +158,7 @@ SideScroller.QuizFinal.prototype = {
     this.anim_pingu_antartida.play(10, true);
       
     this.mar_antartida = this.game.add.sprite(0, 370, "mar_antartida");
-    var tween = this.game.add.tween(this.mar_antartida).to( { y: 268 }, 30000, Phaser.Easing.Cubic.Out, true);
+    var tween = this.game.add.tween(this.mar_antartida).to( { y: 268 }, 50000, Phaser.Easing.Cubic.Out, true);
     tween.onComplete.add(this.gotoError, this); 
         
     }

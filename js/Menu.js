@@ -12,6 +12,8 @@ SideScroller.Menu.prototype = {
   create: function() {
     this.game.stage.backgroundColor = '#000000';
     this.game.world.setBounds(0, 0, windowWidth, windowHeight);
+    this.clicAudio = this.add.audio('audio_button');
+      
       
     this.bkg = this.game.add.sprite(0, 0,  'portada');
     //this.bkg.height = 360;
@@ -39,10 +41,12 @@ SideScroller.Menu.prototype = {
     },
     
   gotoEstadoVideo: function() {
+        this.clicAudio.play();
         this.state.start('Video');
         },
     
   gotoEstadoCredits: function() {
+        this.clicAudio.play();
         this.state.start('Credits');
         },
     

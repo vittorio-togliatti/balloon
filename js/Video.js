@@ -23,6 +23,8 @@ SideScroller.Video.prototype = {
                   }
     //Fin Parametrizacion
     
+   
+    this.clicAudio = this.add.audio('audio_button');
     this.bkg = this.game.add.sprite(0, 0,'img_intro');
       
     this.nens = this.game.add.sprite(-400, 165,'sheet_intro_runtalk',0);
@@ -37,7 +39,10 @@ SideScroller.Video.prototype = {
     this.boton_next = this.game.add.sprite(520, 315, 'img_saltarintro');
     this.boton_next.inputEnabled = true;
     this.boton_next.events.onInputDown.add(this.gotoEstadoMapa, this);
-    
+      
+      
+    this.introMusic = this.game.add.audio('audio_intro');
+    this.introMusic.play();
     }, 
  
   update: function() {
@@ -50,7 +55,9 @@ SideScroller.Video.prototype = {
  
     
   gotoEstadoMapa: function(){
-         this.state.start('Mapa');
+      this.introMusic.stop();
+      this.clicAudio.play();
+      this.state.start('Mapa');
     },
  
   speak1: function(){

@@ -10,6 +10,7 @@ SideScroller.Credits.prototype = {
     },
  
   create: function() {
+    this.clicAudio = this.add.audio('audio_button');
     this.game.stage.backgroundColor = '#FFFFFF';
     var credits = this.game.add.sprite(0, 360,  'credits');
       
@@ -30,6 +31,7 @@ SideScroller.Credits.prototype = {
     },
     
   gotoEstadoMenu: function() {
+        this.clicAudio.play();
         this.state.start('Menu');
         }
 };

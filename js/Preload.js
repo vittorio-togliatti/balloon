@@ -13,7 +13,7 @@ SideScroller.Preload.prototype = {
    
     //this.preloadBar = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'preloadbar');
       
-    this.preloadBar = this.add.sprite(this.game.world.centerX-53, this.game.world.centerY-10, 'preloadbar');
+    this.preloadBar = this.add.sprite(this.game.world.centerX-50, this.game.world.centerY-10, 'preloadbar');
  
     this.preloadBar.anchor.setTo(0.0);
  
@@ -91,28 +91,39 @@ SideScroller.Preload.prototype = {
     this.load.image('ruta_5', 'img/mapa/mapa_ruta5.png');
     this.load.image('ruta_6', 'img/mapa/mapa_ruta6.png');
       
-//      for (i=1;i<=17;i++){
-//          this.load.image('img_objetivo_' + i, 'img/mapa/info_obj' + i + '.png');
-//      }
-      this.load.image('img_objetivo_1', 'img/mapa/info_obj1.png');
-       this.load.image('img_objetivo_2', 'img/mapa/info_obj2.png');
-       this.load.image('img_objetivo_3', 'img/mapa/info_obj3.png');
-       this.load.image('img_objetivo_4', 'img/mapa/info_obj4.png');
-       this.load.image('img_objetivo_5', 'img/mapa/info_obj5.png');
-       this.load.image('img_objetivo_6', 'img/mapa/info_obj6.png');
-       this.load.image('img_objetivo_7', 'img/mapa/info_obj7.png');
-       this.load.image('img_objetivo_8', 'img/mapa/info_obj8.png');
-       this.load.image('img_objetivo_9', 'img/mapa/info_obj9.png');
-       this.load.image('img_objetivo_10', 'img/mapa/info_obj10.png');
-       this.load.image('img_objetivo_11', 'img/mapa/info_obj11.png');
-       this.load.image('img_objetivo_12', 'img/mapa/info_obj12.png');
-       this.load.image('img_objetivo_13', 'img/mapa/info_obj13.png');
-       this.load.image('img_objetivo_14', 'img/mapa/info_obj14.png');
-      this.load.image('img_objetivo_15', 'img/mapa/info_obj15.png');
-      this.load.image('img_objetivo_16', 'img/mapa/info_obj16.png');
-      this.load.image('img_objetivo_17', 'img/mapa/info_obj17.png');
+    this.load.image('img_objetivo_1', 'img/mapa/info_obj1.png');
+    this.load.image('img_objetivo_2', 'img/mapa/info_obj2.png');
+    this.load.image('img_objetivo_3', 'img/mapa/info_obj3.png');
+    this.load.image('img_objetivo_4', 'img/mapa/info_obj4.png');
+    this.load.image('img_objetivo_5', 'img/mapa/info_obj5.png');
+    this.load.image('img_objetivo_6', 'img/mapa/info_obj6.png');
+    this.load.image('img_objetivo_7', 'img/mapa/info_obj7.png');
+    this.load.image('img_objetivo_8', 'img/mapa/info_obj8.png');
+    this.load.image('img_objetivo_9', 'img/mapa/info_obj9.png');
+    this.load.image('img_objetivo_10', 'img/mapa/info_obj10.png');
+    this.load.image('img_objetivo_11', 'img/mapa/info_obj11.png');
+    this.load.image('img_objetivo_12', 'img/mapa/info_obj12.png');
+    this.load.image('img_objetivo_13', 'img/mapa/info_obj13.png');
+    this.load.image('img_objetivo_14', 'img/mapa/info_obj14.png');
+    this.load.image('img_objetivo_15', 'img/mapa/info_obj15.png');
+    this.load.image('img_objetivo_16', 'img/mapa/info_obj16.png');
+    this.load.image('img_objetivo_17', 'img/mapa/info_obj17.png');
+    
+    this.load.image('img_norteamerica_in', 'img/norteamerica/transicion_in.png');
+    this.load.image('img_norteamerica_out', 'img/norteamerica/transiciones_out.png');
+    this.load.image('img_sudamerica_in', 'img/sudamerica/transicion_in.png');
+    this.load.image('img_sudamerica_out', 'img/sudamerica/transicion_out.png');
+    this.load.image('img_europa_in', 'img/europa/transicion_in.png');
+    this.load.image('img_europa_out', 'img/europa/transicion_out.png');
+    this.load.image('img_africa_in', 'img/africa/transicion_in.png');
+    this.load.image('img_africa_out', 'img/africa/transicion_out.png');
+    this.load.image('img_asia_in', 'img/asia/transicion_in.png');
+    this.load.image('img_asia_out', 'img/asia/transicion_out.png');
+    this.load.image('img_oceania_in', 'img/oceania/transicion_in.png');
+    this.load.image('img_oceania_out', 'img/oceania/transicion_out.png');
       
-      
+    this.load.image('img_antartida_out', 'img/common/transicion_out_antartida.png');
+    
       
     //Game
     this.load.audio('explosion', 'audio/explosion.ogg');
@@ -121,9 +132,12 @@ SideScroller.Preload.prototype = {
     this.load.audio('up', 'audio/up.ogg');
     this.load.audio('correct', 'audio/correct.ogg');
     this.load.audio('wrong', 'audio/wrong.ogg');
+    this.load.audio('audio_intro', 'audio/intro.ogg');
+    this.load.audio('audio_powerup', 'audio/PowerupBar.ogg');
+    this.load.audio('audio_button', 'audio/clic.ogg');
+      
     this.load.audio('loop', 'audio/8bit-loop.ogg');
-    this.load.audio('correct', 'audio/correct.ogg');
-    this.load.audio('wrong', 'audio/wrong.ogg');
+   
     
       
     this.load.spritesheet('btn_continuar', 'img/common/btn_continuar.png', 150, 38, 2);
@@ -184,6 +198,10 @@ SideScroller.Preload.prototype = {
     this.load.image('arbolesSecos', 'img/common/arboles_secos.png');
     this.load.spritesheet('sheet_arbol_gran', 'img/common/arbol_gran.png', 14, 32, 2);
     this.load.spritesheet('sheet_arbol_peque', 'img/common/arbol_peque.png', 10, 15, 2);
+    this.load.spritesheet('sheet_coche_gran', 'img/common/coche_gran.png', 27, 12, 2);
+    this.load.spritesheet('sheet_coche_peque', 'img/common/coche_peque.png', 21, 12, 2);
+      
+      
     this.game.load.physics("sprite_physics", "balloon.json");
     
       

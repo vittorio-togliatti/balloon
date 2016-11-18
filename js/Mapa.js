@@ -14,6 +14,7 @@ SideScroller.Mapa.prototype = {
   create: function() {
     this.game.world.setBounds(0, 0, windowWidth, windowHeight);
     this.game.stage.backgroundColor = '#000000';
+    this.clicAudio = this.add.audio('audio_button');
       
     this.nivel = localStorage.getItem('nivel');
     this.nivel = this.nivel*1;
@@ -51,43 +52,43 @@ SideScroller.Mapa.prototype = {
     this.antartida = this.game.add.sprite(117, 278,  'antartida_gris');
     
     var but_nortamerica_x = 110;
-    var but_nortamerica_y = 62;
+    var but_nortamerica_y = 42;
       
     var but_sudamerica_x = 182;
-    var but_sudamerica_y = 173;
+    var but_sudamerica_y = 153;
       
     var but_europa_x = 298;
-    var but_europa_y = 58;
+    var but_europa_y = 38;
       
     var but_africa_x = 340;
-    var but_africa_y = 136;
+    var but_africa_y = 116;
       
     var but_asia_x = 443;
-    var but_asia_y = 71;
+    var but_asia_y = 51;
       
-    var but_oceania_x = 532;
-    var but_oceania_y = 200;
+    var but_oceania_x = 535;
+    var but_oceania_y = 185;
       
-    var but_antartida_x = 377;
-    var but_antartida_y = 287;
+    var but_antartida_x = 375;
+    var but_antartida_y = 290;
       
     var ruta1_x = 120;
-    var ruta1_y = 75;
+    var ruta1_y = 55;
     
     var ruta2_x = 198;
-    var ruta2_y = 70;
+    var ruta2_y = 50;
     
     var ruta3_x = 315;
-    var ruta3_y = 70;
+    var ruta3_y = 50;
       
     var ruta4_x = 358;
-    var ruta4_y = 83;
+    var ruta4_y = 63;
       
-    var ruta5_x = 450;
-    var ruta5_y = 82;
+    var ruta5_x = 455;
+    var ruta5_y = 62;
       
     var ruta6_x = 390;
-    var ruta6_y = 205;
+    var ruta6_y = 195;
     
       
    
@@ -145,27 +146,33 @@ SideScroller.Mapa.prototype = {
     
     switch(this.nivel) {
             case 0://NordAmerica
+                this.introInSheet = "img_norteamerica_in";
                 boton_play = this.game.add.sprite(but_nortamerica_x, but_nortamerica_y, 'ss_botones');
                 break;
             case 1://SudAmerica
+                this.introInSheet = "img_sudamerica_in";
                 boton_play = this.game.add.sprite(but_sudamerica_x, but_sudamerica_y, 'ss_botones');
                 break;
             case 2://Europa
+                this.introInSheet = "img_europa_in";
                 boton_play = this.game.add.sprite(but_europa_x, but_europa_y, 'ss_botones');
                 break;
             case 3://Africa
+                this.introInSheet = "img_africa_in";
                 boton_play = this.game.add.sprite(but_africa_x, but_africa_y, 'ss_botones');
                 break;
             case 4://Asia
+                this.introInSheet = "img_asia_in";
                 boton_play = this.game.add.sprite(but_asia_x, but_asia_y, 'ss_botones');
                 break;
             case 5://Oceania
+                this.introInSheet = "img_oceania_in";
                 boton_play = this.game.add.sprite(but_oceania_x, but_oceania_y, 'ss_botones');
                 break;
             case 6://Antartida
                 boton_play = this.game.add.sprite(but_antartida_x, but_antartida_y, 'ss_botones');
                 break;
-            case 7://Antartida
+            case 7://Fin
                 boton_play = this.game.add.sprite(but_antartida_x, but_antartida_y + 100, 'ss_botones');
                 break;
         }
@@ -173,7 +180,7 @@ SideScroller.Mapa.prototype = {
     boton_play.animations.add('pulse');
     boton_play.animations.play('pulse', 3, true);
     boton_play.inputEnabled = true;
-    boton_play.events.onInputDown.add(this.gotoGame, this); 
+    boton_play.events.onInputDown.add(this.gotoInFrame, this); 
       
     this.boton_atras = this.game.add.sprite(10, 0, 'atras_blanco');
     this.boton_atras.inputEnabled = true;
@@ -187,8 +194,23 @@ SideScroller.Mapa.prototype = {
   render: function(){
         
     },
+ 
+  gotoInFrame: function(){
+      this.clicAudio.play();
+      if (this.nivel==6){
+          this.gotoGame();
+      } else {
+            var intro_in = this.game.add.sprite(0, 0, this.introInSheet);
+            var boton_start = this.game.add.sprite(584, 303, 'start_play',0);
+            boton_start.inputEnabled = true;
+            boton_start.events.onInputDown.add(this.gotoGame, this); 
+      }
+      
+    },
     
   gotoGame: function() {
+          this.clicAudio.play();
+      
           if (this.nivel == 6){
                this.state.start('QuizFinal');
           } else {
@@ -198,6 +220,7 @@ SideScroller.Mapa.prototype = {
     },
  
   gotoMenu: function(){
+        this.clicAudio.play();
         this.state.start('Menu');
     },
  
