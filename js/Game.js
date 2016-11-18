@@ -578,12 +578,10 @@ SideScroller.Game.prototype = {
             this.powerEmitter.makeParticles('particulas', [0, 1, 2, 3, 4, 5]);
             this.powerEmitter.start(true, 3000,null,20);
             
-           if (!this.end){ //Para no parar la animación final del power up
+        if (!this.end){ //Para no parar la animación final del power up
             this.powerup += 1;
             this.barraEnergia.body.sprite.loadTexture('barra_energia', this.powerup);
-           } 
             
-           
            if (this.powerup == this.powerUpLevelMax){
                 this.end = true;
                this.player.body.velocity.x = 0;
@@ -591,18 +589,15 @@ SideScroller.Game.prototype = {
                this.player.body.clearCollision(true, true);
                this.player.body.data.gravityScale = 0;
               
-            
-            
-               
-               //this.game.paused = true;
                this.anim_barra = this.barraEnergia.animations.add('barra_energia');
                this.anim_barra.play(5, true);
                this.powerUpAudio.play();
                
                this.game.time.events.add(3000, this.gotoMainQuiz, this);
            }
+        }
            
-       }
+     }
             
        
        
