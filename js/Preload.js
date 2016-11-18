@@ -139,7 +139,7 @@ SideScroller.Preload.prototype = {
     this.load.audio('loop', 'audio/8bit-loop.ogg');
    
     
-      
+    this.load.spritesheet('sheet_dedo', 'img/common/dedo_swipe.png', 128, 128, 6);
     this.load.spritesheet('btn_continuar', 'img/common/btn_continuar.png', 150, 38, 2);
     this.load.spritesheet('btn_mapa', 'img/common/btn_mapa.png', 150, 38, 2);
     this.load.spritesheet('barra_energia', 'img/common/barra_energia.png', 100, 16, 15);

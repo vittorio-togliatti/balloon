@@ -28,7 +28,7 @@ SideScroller.Game.prototype = {
     this.powerup = 0;
     this.game.stage.backgroundColor = '#C9C9C9';
     this.game.world.setBounds(0, 0, windowWidth * 2, windowHeight);
-      
+    
     this.nivel = localStorage.getItem('nivel')*1;
 
     
@@ -261,6 +261,8 @@ SideScroller.Game.prototype = {
       
     //Para salir de la pausa  
     this.input.onDown.add(this.unpause, this);
+      
+    this.showHelp();
  }, 
  
   update: function() {
@@ -678,7 +680,42 @@ SideScroller.Game.prototype = {
     
         gotoMainQuiz: function() {
             this.state.start('MainQuiz');
-            }
+            },
+    
+    showHelp: function(){
+            
+            this.game.time.events.add(2000, this.startDedoClickAnimation, this);
+    
+            this.game.time.events.add(4000, this.stopDedoAnimation, this);
+    
+            this.game.time.events.add(5000, this.startSwipeAnimation, this);
+    
+            this.game.time.events.add(10000, this.stopSwipeAnimation, this);
+    
+            
+        },
+    
+    stopDedoAnimation: function() {
+        this.dedo_help.animations.stop(null, true);
+    },
+    
+    stopSwipeAnimation: function() {
+        this.dedo_help.animations.stop(null, true);
+        this.dedo_help.kill();
+    },
+    
+    startSwipeAnimation: function() {
+        //this.dedo_help.animations.play('swipe',4,true);
+        this.anim_dedo_swipe.play(4, true);
+    },
+    
+    startDedoClickAnimation: function() {
+        this.dedo_help = this.game.add.sprite(20, 120, 'sheet_dedo',0);
+        this.anim_dedo_click = this.dedo_help.animations.add('click',[0,1]);
+        this.anim_dedo_swipe = this.dedo_help.animations.add('swipe',[2,3,4,5]);
+        
+        this.anim_dedo_click.play(2, true);
+    }
     
 };
 
