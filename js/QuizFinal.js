@@ -92,7 +92,7 @@ SideScroller.QuizFinal.prototype = {
         
         var boton_start = this.game.add.sprite(584, 303, 'start_play',0);
         boton_start.inputEnabled = true;
-        boton_start.events.onInputDown.add(this.gotoMapa, this); 
+        boton_start.events.onInputDown.add(this.gotoEnd, this); 
         
         //this.game.time.events.add(3000, this.gotoMapa, this);
     },
@@ -110,8 +110,19 @@ SideScroller.QuizFinal.prototype = {
     },
     
     gotoMapa: function(){
-        this.preguntaActual=0;
         this.state.start('Mapa');
+    },
+    
+    gotoEnd: function(){
+        this.preguntaActual=0;
+        var end_img = this.game.add.sprite(0,0,'outro_game',0);
+        var animacion_final = end_img.animations.add('movimiento_final');
+        animacion_final.play(5, true);
+        
+        var boton_start = this.game.add.sprite(584, 303, 'start_play',0);
+        boton_start.inputEnabled = true;
+        boton_start.events.onInputDown.add(this.gotoMapa, this); 
+      
     },
     
     gotoError: function(){

@@ -53,7 +53,7 @@ SideScroller.Menu.prototype = {
   inExtras: function() {
         this.but_extras = this.game.add.sprite(260, 400, 'btn_extras',0);
         this.but_extras.inputEnabled = true;
-        this.but_extras.events.onInputDown.add(this.gotoEstadoVideo, this);
+        this.but_extras.events.onInputDown.add(this.openExtra, this);
         var tween = this.game.add.tween(this.but_extras).to( { y: 235 }, 1000, Phaser.Easing.Cubic.Out, true);
         },
     
@@ -80,6 +80,11 @@ SideScroller.Menu.prototype = {
       var tween = this.game.add.tween(this.pinguiIntro).to( { x:470,y: 5 }, 1000, Phaser.Easing.Cubic.Out, true);
         
         
+  },
+    
+  openExtra: function(){
+      //window.open("www.phaser.io", "_self");
+      window.location.href = "http://scout.es/objetivorockhopper"; 
   }
     
     

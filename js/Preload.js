@@ -247,10 +247,10 @@ SideScroller.Preload.prototype = {
     this.load.image('preg_ant_21', 'img/preguntas/ant_preg21.png');
     this.load.image('preg_ant_22', 'img/preguntas/ant_preg22.png');
       
-    this.load.spritesheet('pinguino_antartida', 'img/preguntas/sheet_pingu_hunde.png', 640, 92, 2);
+    this.load.spritesheet('pinguino_antartida','img/preguntas/sheet_pingu_hunde.png',640,92,2);
     this.load.image('mar_antartida', 'img/preguntas/ant_mar.png');
     this.load.image('info_dead', 'img/common/info_dead.png');
-    
+    this.load.spritesheet('outro_game','img/intro/sheet_outro.png',640,360,2);
     
    
   },
