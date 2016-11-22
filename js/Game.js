@@ -9,8 +9,7 @@ SideScroller.Game.prototype = {
  
       this.game.time.advancedTiming = true;
       
-      var item = localStorage.getItem('gameData');
-      this.dataObj = item;
+     
     },
  
   create: function() {
@@ -21,7 +20,7 @@ SideScroller.Game.prototype = {
     
       
     //***********  end customize ************//
-      
+    var tempLevel = localStorage.getItem('tempLevel')*1;
     this.MINIMUM_SWIPE_LENGTH = 30;
     this.end=false;
     this.onGround=false;
@@ -29,7 +28,13 @@ SideScroller.Game.prototype = {
     this.game.stage.backgroundColor = '#C9C9C9';
     this.game.world.setBounds(0, 0, windowWidth * 2, windowHeight);
     
-    this.nivel = localStorage.getItem('nivel')*1;
+     if (tempLevel >= 0){
+         this.nivel = tempLevel;
+     } else{
+         this.nivel = localStorage.getItem('nivel')*1;
+     }
+      
+    
 
     
     //Create audio files
@@ -582,11 +587,11 @@ SideScroller.Game.prototype = {
            
             this.emitter = this.add.emitter(objetoColision.sprite.body.x, objetoColision.sprite.body.y, 10);
             this.emitter.makeParticles('particulas', [0, 1, 2, 3, 4, 5]);
-            this.emitter.start(true, 2000,null,20);
+            this.emitter.start(true, 2000,null,10);
        
             this.powerEmitter = this.add.emitter(60, 20);
             this.powerEmitter.makeParticles('particulas', [0, 1, 2, 3, 4, 5]);
-            this.powerEmitter.start(true, 3000,null,20);
+            this.powerEmitter.start(true, 3000,null,5);
             
         if (!this.end){ //Para no parar la animación final del power up
             this.powerup += 1;

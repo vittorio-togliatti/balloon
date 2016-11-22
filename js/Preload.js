@@ -10,36 +10,33 @@ SideScroller.Preload.prototype = {
       
     //show loading screen
     this.bkg = this.game.add.sprite(0, 0,  'preloadbkg');
-   
-    //this.preloadBar = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'preloadbar');
       
     this.preloadBar = this.add.sprite(this.game.world.centerX-51, this.game.world.centerY-10, 'preloadbar');
- 
     this.preloadBar.anchor.setTo(0.0);
- 
     this.preloadBar.scale.setTo(2.1,2.7);
- 
-    //this.preloadBar.anchor.setTo(0.5);
- 
-    //this.preloadBar.scale.setTo(3);
  
     this.load.setPreloadSprite(this.preloadBar);
       
     //Load saved data
-    if (localStorage.getItem('gameData') == null){
-        
-        var gameData = {'continentCompleted':0,'questionLevel':0};
-        localStorage.setItem("gameData", JSON.stringify(gameData));
-      
-	   } else {
-            this.dataObj = JSON.parse(localStorage.getItem('gameData'));
-        }
+//    if (localStorage.getItem('gameData') == null){
+//        
+//        var gameData = {'continentCompleted':0,'questionLevel':0};
+//        localStorage.setItem("gameData", JSON.stringify(gameData));
+//      
+//	   } else {
+//            this.dataObj = JSON.parse(localStorage.getItem('gameData'));
+//        }
  
     //load game assets
       
     //common
     this.load.spritesheet('start_play', 'img/common/btn_play.png', 36, 38, 2);
     this.load.image('atras_negro', 'img/common/btn_atras_negro.png');
+      
+      
+    //SplashScreens
+    this.load.image('splash1', 'img/portada_menu/splash_asde.png');
+    this.load.image('splash2', 'img/portada_menu/splash_aecid.png');
       
     //Portada
     this.load.image('portada', 'img/portada_menu/portada_bkg.png');
@@ -259,7 +256,7 @@ SideScroller.Preload.prototype = {
   },
  
   create: function() {
-      this.state.start('Menu');
+      this.state.start('Splash');
   }
  
 };

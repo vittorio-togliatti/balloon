@@ -42,6 +42,7 @@ var currentScaleFactor = windowHeight / originalHeight;
 SideScroller.game = new Phaser.Game(windowWidth, windowHeight, Phaser.AUTO, '','','',false,'');
  
 SideScroller.game.state.add('Boot', SideScroller.Boot);
+SideScroller.game.state.add('Splash', SideScroller.Splash);
 SideScroller.game.state.add('Preload', SideScroller.Preload);
 SideScroller.game.state.add('Menu', SideScroller.Menu);
 SideScroller.game.state.add('Video', SideScroller.Video);

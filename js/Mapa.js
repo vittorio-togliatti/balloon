@@ -9,6 +9,7 @@ SideScroller.Mapa.prototype = {
         var objetivosNivelJson = '{"objetivos":[{"objetivo":1,"nivel":4},{"objetivo":2,"nivel":4},{"objetivo":3,"nivel":2},{"objetivo":4,"nivel":5},{"objetivo":5,"nivel":5},{"objetivo":6,"nivel":2},{"objetivo":7,"nivel":3},{"objetivo":8,"nivel":1},{"objetivo":9,"nivel":1},{"objetivo":10,"nivel":5},{"objetivo":11,"nivel":3},{"objetivo":12,"nivel":3},{"objetivo":13,"nivel":7},{"objetivo":14,"nivel":6},{"objetivo":15,"nivel":6},{"objetivo":16,"nivel":7},{"objetivo":17,"nivel":7}]}';
       
       this.objetivosNivelJson = JSON.parse(objetivosNivelJson);
+      localStorage.setItem('tempLevel',-1);
     },
  
   create: function() {
@@ -100,46 +101,69 @@ SideScroller.Mapa.prototype = {
     }
       
       if (this.nivel > 6){//Finish
-            this.antartida = this.game.add.sprite(117, 278,  'antartida_col');
-           var butt6 =  this.game.add.sprite(but_antartida_x, but_antartida_y, 'ss_botones', 1);
+        this.antartida = this.game.add.sprite(117, 278,  'antartida_col');
+        var butt7 =  this.game.add.sprite(but_antartida_x, but_antartida_y, 'ss_botones', 1);
+        butt7.level=6;
+        butt7.inputEnabled = true;
+        butt7.events.onInputDown.add(this.gotoTempLevel, this); 
       }   
     
       if (this.nivel > 5){//Antartida
-            this.oceania = this.game.add.sprite(494, 125,  'oceania_col');
-            var mapa6 = this.game.add.sprite(ruta6_x, ruta6_y,  'ruta_6');
-            var butt6 =  this.game.add.sprite(but_oceania_x, but_oceania_y, 'ss_botones', 1); 
+        this.oceania = this.game.add.sprite(494, 125,  'oceania_col');
+        var mapa6 = this.game.add.sprite(ruta6_x, ruta6_y,  'ruta_6');
+        var butt6 =  this.game.add.sprite(but_oceania_x, but_oceania_y, 'ss_botones', 1);
+        butt6.level=5;
+        butt6.inputEnabled = true;
+        butt6.events.onInputDown.add(this.gotoTempLevel, this); 
       }   
       
       if (this.nivel > 4){//Oceania
-            this.asia = this.game.add.sprite(343, 10,  'asia_col');
-            var mapa5 = this.game.add.sprite(ruta5_x, ruta5_y,  'ruta_5');
-            var butt5 =  this.game.add.sprite(but_asia_x, but_asia_y, 'ss_botones', 1); 
+        this.asia = this.game.add.sprite(343, 10,  'asia_col');
+        var mapa5 = this.game.add.sprite(ruta5_x, ruta5_y,  'ruta_5');
+        var butt5 =  this.game.add.sprite(but_asia_x, but_asia_y, 'ss_botones', 1);
+        butt5.level=4;
+        butt5.inputEnabled = true;
+        butt5.events.onInputDown.add(this.gotoTempLevel, this); 
       }    
     
       if (this.nivel > 3){//Asia
-            this.africa = this.game.add.sprite(269, 85,  'africa_col');
-            var mapa4 = this.game.add.sprite(ruta4_x, ruta4_y,  'ruta_4');
-            var butt4 =  this.game.add.sprite(but_africa_x, but_africa_y, 'ss_botones', 1); 
+        this.africa = this.game.add.sprite(269, 85,  'africa_col');
+        var mapa4 = this.game.add.sprite(ruta4_x, ruta4_y,  'ruta_4');
+        var butt4 =  this.game.add.sprite(but_africa_x, but_africa_y, 'ss_botones', 1);
+        butt4.level=3;
+        butt4.inputEnabled = true;
+        butt4.events.onInputDown.add(this.gotoTempLevel, this); 
       }     
     
       if (this.nivel > 2){//africa
-            this.europa = this.game.add.sprite(273, 11,  'europa_col');
-            var mapa3 = this.game.add.sprite(ruta3_x, ruta3_y,  'ruta_3');
-            var butt3 =  this.game.add.sprite(but_europa_x, but_europa_y, 'ss_botones', 1); 
+        this.europa = this.game.add.sprite(273, 11,  'europa_col');
+        var mapa3 = this.game.add.sprite(ruta3_x, ruta3_y,  'ruta_3');
+        var butt3 =  this.game.add.sprite(but_europa_x, but_europa_y, 'ss_botones', 1);
+        butt3.level=2;
+        butt3.inputEnabled = true;
+        butt3.events.onInputDown.add(this.gotoTempLevel, this); 
+           
       }     
     
       
       if (this.nivel > 1){//europa
-              this.sudamerica = this.game.add.sprite(155, 133,  'sudamerica_col');
-                var butt2 =  this.game.add.sprite(but_sudamerica_x, but_sudamerica_y, 'ss_botones', 1); 
-                var mapa2 = this.game.add.sprite(ruta2_x, ruta2_y,  'ruta_2');
+        this.sudamerica = this.game.add.sprite(155, 133,  'sudamerica_col');
+        var mapa2 = this.game.add.sprite(ruta2_x, ruta2_y,  'ruta_2');
+        var butt2 =  this.game.add.sprite(but_sudamerica_x, but_sudamerica_y, 'ss_botones', 1); 
+        butt2.level=1;
+        butt2.inputEnabled = true;
+        butt2.events.onInputDown.add(this.gotoTempLevel, this); 
+        
                 
       }
       
     if (this.nivel > 0){//sudamerica
         this.norteamerica = this.game.add.sprite(65, 6,  'norteamerica_col');
         var mapa1 = this.game.add.sprite(ruta1_x, ruta1_y,  'ruta_1');
-        var butt1 =  this.game.add.sprite(but_nortamerica_x, but_nortamerica_y, 'ss_botones', 1);  
+        var butt1 =  this.game.add.sprite(but_nortamerica_x, but_nortamerica_y, 'ss_botones', 1); 
+        butt1.level=0;
+        butt1.inputEnabled = true;
+        butt1.events.onInputDown.add(this.gotoTempLevel, this); 
         
       } 
               
@@ -209,9 +233,11 @@ SideScroller.Mapa.prototype = {
     },
     
   gotoGame: function() {
-          this.clicAudio.play();
+        this.clicAudio.play();
       
-          if (this.nivel == 6){
+        var tempLevel = localStorage.getItem('tempLevel')*1;
+      
+          if ((this.nivel == 6 && tempLevel < 0) || tempLevel == 6){
                this.state.start('QuizFinal');
           } else {
                this.state.start('Game');
@@ -243,6 +269,11 @@ SideScroller.Mapa.prototype = {
       this.boton_atras = this.game.add.sprite(10, 0, 'atras_blanco');
       this.boton_atras.inputEnabled = true;
       this.boton_atras.events.onInputDown.add(this.gotoMenu, this);
+    },
+    
+  gotoTempLevel: function(button){
+    localStorage.setItem('tempLevel',button.level);
+    this.gotoGame();
     }
     
 };

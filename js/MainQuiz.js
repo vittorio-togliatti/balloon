@@ -10,10 +10,14 @@ SideScroller.MainQuiz.prototype = {
     },
  
   create: function() {
-    this.nivel = localStorage.getItem('nivel')*1;
-     //localStorage.setItem('nivel',0);
-    
+     var tempLevel = localStorage.getItem('tempLevel')*1;
       
+    if (tempLevel >= 0){
+         this.nivel = tempLevel;
+     } else{
+         this.nivel = localStorage.getItem('nivel')*1;
+     }
+         
     this.correct  = this.add.audio('correct');
     this.wrong  = this.add.audio('wrong');
     

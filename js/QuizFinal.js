@@ -71,6 +71,7 @@ SideScroller.QuizFinal.prototype = {
               this.game.time.events.add(1000, this.proximaPregunta, this);
               
           } else {//Cierro nivel
+              this.marTween.stop(false);     
               this.game.time.events.add(1000, this.finalizarJuego, this);
           }
           
@@ -158,8 +159,9 @@ SideScroller.QuizFinal.prototype = {
     this.anim_pingu_antartida.play(10, true);
       
     this.mar_antartida = this.game.add.sprite(0, 370, "mar_antartida");
-    var tween = this.game.add.tween(this.mar_antartida).to( { y: 268 }, 50000, Phaser.Easing.Cubic.Out, true);
-    tween.onComplete.add(this.gotoError, this); 
+        
+    this.marTween = this.game.add.tween(this.mar_antartida).to( { y: 268 }, 50000, Phaser.Easing.linear, true);
+    this.marTween.onComplete.add(this.gotoError, this); 
         
     }
     
