@@ -182,6 +182,8 @@ SideScroller.Preload.prototype = {
     this.load.image('bkg_oceania_mid', 'img/oceania/bkg_oceania_middle_1024.png');
     this.load.image('bkg_oceania_fr', 'img/oceania/bkg_oceania_front_2048x2048.png');
     this.load.spritesheet('sheet_mar', 'img/oceania/sheet_mar.png', 96, 35, 2);
+    this.load.image('platform_oil', 'img/oceania/platform_oil.png');
+    this.load.image('mar', 'img/oceania/mar.png');
     
       
     
@@ -192,6 +194,10 @@ SideScroller.Preload.prototype = {
       
     //common  
     this.load.image('grua', 'img/common/grua2.png');
+    this.load.image('grua_alta', 'img/common/grua.png');
+    this.load.image('grua_reves', 'img/common/grua_gran.png');
+    this.load.image('torre_gran', 'img/common/torre_gran.png');
+    this.load.image('torre_peque', 'img/common/torre_peque.png');
     this.load.image('arbolesSecos', 'img/common/arboles_secos.png');
     this.load.spritesheet('sheet_arbol_gran', 'img/common/arbol_gran.png', 14, 32, 2);
     this.load.spritesheet('sheet_arbol_peque', 'img/common/arbol_peque.png', 10, 15, 2);

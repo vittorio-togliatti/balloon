@@ -13,9 +13,9 @@ SideScroller.QuizFinal.prototype = {
     this.correct  = this.add.audio('correct');
     this.wrong  = this.add.audio('wrong');
     
-     if (typeof this.preguntaActual == 'undefined'){
-          this.preguntaActual=0;
-      }
+    if (typeof this.preguntaActual == 'undefined'){
+      this.preguntaActual=0;
+    }
       
     var preguntasJson = '{"preguntas":[{"numPregunta":13,"respuesta":1},{"numPregunta":16,"respuesta":2},{"numPregunta":17,"respuesta":2},{"numPregunta":18,"respuesta":2},{"numPregunta":19,"respuesta":3},{"numPregunta":20,"respuesta":2},{"numPregunta":21,"respuesta":1},{"numPregunta":22,"respuesta":2}]}';
       
@@ -79,6 +79,7 @@ SideScroller.QuizFinal.prototype = {
           
       } else { //Vuelvo al juego
           this.wrong.play();
+          this.preguntaActual = 0;
           this.game.time.events.add(1000, this.gotoMapa, this);
       }
       

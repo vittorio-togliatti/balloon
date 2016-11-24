@@ -13,9 +13,11 @@ SideScroller.MainQuiz.prototype = {
      var tempLevel = localStorage.getItem('tempLevel')*1;
       
     if (tempLevel >= 0){
-         this.nivel = tempLevel;
+        this.nivel = tempLevel;
+        this.fakeLevel=true;//Si repito nivel
      } else{
          this.nivel = localStorage.getItem('nivel')*1;
+         this.fakeLevel=false;
      }
          
     this.correct  = this.add.audio('correct');
@@ -131,8 +133,12 @@ SideScroller.MainQuiz.prototype = {
         var img_congrats = this.game.add.sprite(0, 0, this.outroSheet);
         
         this.preguntaActual = 0;
-        this.nivel += 1;
-        localStorage.setItem('nivel',this.nivel);
+        
+        if (!this.fakeLevel){
+            this.nivel += 1;
+            localStorage.setItem('nivel',this.nivel);
+        }
+        
         
         
         var boton_start = this.game.add.sprite(584, 303, 'start_play',0);

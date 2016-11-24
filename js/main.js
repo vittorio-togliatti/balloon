@@ -35,6 +35,9 @@ if (tempWindowWidth > tempWindowHeight){
 //var windowHeight = 1005;
 //var windowWidth = 1920;
 
+var windowHeight = 360;
+var windowWidth = 640;
+
 var currentScaleFactor = windowHeight / originalHeight;
     windowHeight = originalHeight;
     windowWidth = windowWidth / currentScaleFactor;

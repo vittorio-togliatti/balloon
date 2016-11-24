@@ -69,6 +69,14 @@ SideScroller.Game.prototype = {
     this.cocheGranSheetName = "sheet_coche_gran";
     this.cocheGranY = 38;
       
+    this.gruaImgName = "grua";
+    this.gruaAltaImgName = "grua_alta";
+    this.gruaRevesImgName = "grua_reves";
+    this.torreGranImgName = "torre_gran";
+    this.torrePequeImgName = "torre_peque";
+    this.platformImgName = "platform_oil";
+    this.marImgName = "mar";
+      
     //Parametrizacion Continentes
     switch(this.nivel) {
         case 0://NordAmerica
@@ -83,11 +91,18 @@ SideScroller.Game.prototype = {
         this.firstObjectY = 96;
         this.probabilidadesObjetos = 
                   {"arboles1":3,
-                   "coches1":8,
-                   "arboles2":11,
+                   "coches1":7,
+                   "arboles2":10,
                    "objetoPrincipalNivel":13,
-                   "coches2":17,
-                   "Gruas":20
+                   "coches2":15,
+                   "Gruas":20,
+                   "torreGran":21,
+                   "torrePeque":21,
+                   "platform":21,
+                   "mar":21,
+                   "nada":10,
+                   "avion":20,
+                   "helicoptero":21
                   }
         break;
             
@@ -105,8 +120,15 @@ SideScroller.Game.prototype = {
                    "coches1":8,
                    "arboles2":11,
                    "objetoPrincipalNivel":13,
-                   "coches2":17,
-                   "Gruas":20
+                   "coches2":15,
+                   "Gruas":17,
+                   "torreGran":20,
+                   "torrePeque":21,
+                   "platform":21,
+                   "mar":21,
+                   "nada":7,
+                   "avion":20,
+                   "helicoptero":21
                   }
         break;
             
@@ -122,11 +144,18 @@ SideScroller.Game.prototype = {
         this.firstObjectY = 94;
         this.probabilidadesObjetos = 
                   {"arboles1":3,
-                   "coches1":8,
-                   "arboles2":11,
-                   "objetoPrincipalNivel":13,
-                   "coches2":17,
-                   "Gruas":20
+                   "coches1":5,
+                   "arboles2":7,
+                   "objetoPrincipalNivel":9,
+                   "coches2":13,
+                   "Gruas":15,
+                   "torreGran":17,
+                   "torrePeque":20,
+                   "platform":21,
+                   "mar":21,
+                   "nada":7,
+                   "avion":15,
+                   "helicoptero":20
                   }
         break;
             
@@ -143,10 +172,17 @@ SideScroller.Game.prototype = {
         this.probabilidadesObjetos = 
                   {"arboles1":3,
                    "coches1":8,
-                   "arboles2":11,
-                   "objetoPrincipalNivel":13,
-                   "coches2":17,
-                   "Gruas":20
+                   "arboles2":9,
+                   "objetoPrincipalNivel":11,
+                   "coches2":13,
+                   "Gruas":14,
+                   "torreGran":15,
+                   "torrePeque":20,
+                   "platform":21,
+                   "mar":21,
+                   "nada":5,
+                   "avion":15,
+                   "helicoptero":20
                   }
         break;
             
@@ -157,16 +193,24 @@ SideScroller.Game.prototype = {
         this.firstObjectName = "escuela";
         this.firstObjectHasSheet = true;
         this.firstObjectSheetName = "sheet_escuela"
+        this.firstObjectHasSecondAnimation = false;
         this.firstObjectColorFrame =1;
         this.firstObjectX = 800;
         this.firstObjectY = 67;
         this.probabilidadesObjetos = 
                   {"arboles1":3,
-                   "coches1":8,
-                   "arboles2":11,
-                   "objetoPrincipalNivel":13,
-                   "coches2":17,
-                   "Gruas":20
+                   "coches1":6,
+                   "arboles2":7,
+                   "objetoPrincipalNivel":10,
+                   "coches2":11,
+                   "Gruas":14,
+                   "torreGran":17,
+                   "torrePeque":20,
+                   "platform":21,
+                   "mar":21,
+                   "nada":4,
+                   "avion":15,
+                   "helicoptero":20
                   }
         break;
             
@@ -177,17 +221,23 @@ SideScroller.Game.prototype = {
         this.firstObjectName = "mar";
         this.firstObjectHasSheet = true;
         this.firstObjectSheetName = "sheet_mar"
+        this.firstObjectHasSecondAnimation = false;
         this.firstObjectColorFrame =1;
         this.firstObjectY = 20;
         this.probabilidadesObjetos = 
-                  {"arboles1":3,
-                   "coches1":8,
-                   "arboles2":11,
-                   "objetoPrincipalNivel":13,
-                   "coches2":17,
-                   "Gruas":20,
-                   "aviones":5,
-                   "helicopteros":10
+                  {"arboles1":-1,
+                   "coches1":-1,
+                   "arboles2":-1,
+                   "objetoPrincipalNivel":5,
+                   "coches2":-1,
+                   "Gruas":-1,
+                   "torreGran":-1,
+                   "torrePeque":-1,
+                   "platform":10,
+                   "mar":20,
+                   "nada":3,
+                   "avion":15,
+                   "helicoptero":20
                   }
         break;
       }
@@ -262,7 +312,7 @@ SideScroller.Game.prototype = {
     this.timer = this.time.events.loop(1500, this.addObjectsOnFloor, this);
       
     //Rutina de creación de aviones y helicopteros
-    this.timer = this.time.events.loop(4000, this.addObjectsOnAir, this);
+    this.timer = this.time.events.loop(2000, this.addObjectsOnAir, this);
       
     //Para salir de la pausa  
     this.input.onDown.add(this.unpause, this);
@@ -394,13 +444,13 @@ SideScroller.Game.prototype = {
       
     },
     
-    addGrua: function(x, y) {
+    addGrua: function(x, y,imgName) {
         
-        var grua = this.gruas.create(x, y, 'grua');
+        var grua = this.gruas.create(x, y, imgName);
         this.game.physics.p2.enable([grua], false);
         grua.body.clearShapes();
         //body type static??????
-        grua.body.loadPolygon("sprite_physics", "grua");
+        grua.body.loadPolygon("sprite_physics", imgName);
         grua.body.fixedRotation = true;
         grua.body.data.gravityScale = 0;
         grua.body.damping = 0;
@@ -507,19 +557,40 @@ SideScroller.Game.prototype = {
                this.addSecondObject(this.firstObjectX + 40, this.game.height - this.cocheGranY, this.cocheGranSheetName);
                 
             } else if(hole <= this.probabilidadesObjetos.Gruas){
-                 this.addGrua(800, this.game.height - 101);
-            }else {
+                 this.addGrua(800, this.game.height - 101,this.gruaImgName);
+                
+            }else if(hole <= this.probabilidadesObjetos.torreGran){
+                 this.addGrua(800, this.game.height - 100,this.torreGranImgName);
+                
+            }else if(hole <= this.probabilidadesObjetos.torrePeque){
+                 this.addGrua(800, this.game.height - 91,this.torrePequeImgName);
+                
+            }else if(hole <= this.probabilidadesObjetos.platform){
+                 this.addGrua(800, this.game.height - 89,this.platformImgName);
+                
+            }else if(hole <= this.probabilidadesObjetos.mar){
+                this.addGrua(800, this.game.height - 16,this.marImgName);
+                this.addGrua(890 , this.game.height - 16,this.marImgName);
+                this.addGrua(980 , this.game.height - 16,this.marImgName);
+                this.addGrua(1070 , this.game.height - 16,this.marImgName);
+                
+            }  else {
                //Res
             }
         },
     
     addObjectsOnAir: function() {
-        var hole = Math.floor(Math.random() * 5) + 1;
+        var altura = Math.floor(Math.random() * 100) + 1;
+        var hole = Math.floor(Math.random() * 20) + 1;
         
-        if (hole < 4){
-            this.addAvion(800,this.game.height - 300);
-            } else {
-                this.addHelicoptero(800, this.game.height - 300);
+        if (hole <= this.probabilidadesObjetos.nada){
+                    //nada
+            } else if  (hole <= this.probabilidadesObjetos.avion){
+                this.addAvion(800,10 + altura);
+            } else if(hole <= this.probabilidadesObjetos.helicoptero){
+               this.addHelicoptero(800, 10 + altura); 
+            } else{
+                
             }
         },
     
