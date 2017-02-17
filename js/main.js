@@ -32,11 +32,8 @@ if (tempWindowWidth > tempWindowHeight){
     windowHeight = tempWindowWidth;
 }
 
-//var windowHeight = 1005;
-//var windowWidth = 1920;
-
-var windowHeight = 360;
-var windowWidth = 640;
+var windowHeight = 360; //machaco los valores de pantalla para compatibilidad con pantallas 
+var windowWidth = 640;  //Con proporciones diferentes
 
 var currentScaleFactor = windowHeight / originalHeight;
     windowHeight = originalHeight;

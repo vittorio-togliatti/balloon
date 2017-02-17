@@ -20,6 +20,7 @@ SideScroller.Game.prototype = {
     
       
     //***********  end customize ************//
+      
     var tempLevel = localStorage.getItem('tempLevel')*1;
     this.MINIMUM_SWIPE_LENGTH = 30;
     this.end=false;
@@ -64,10 +65,10 @@ SideScroller.Game.prototype = {
     this.arbolPequeY = 40;
       
     this.cochePequeSheetName = "sheet_coche_peque";
-    this.cochePequeY = 38;
+    this.cochePequeY = 40;
       
     this.cocheGranSheetName = "sheet_coche_gran";
-    this.cocheGranY = 38;
+    this.cocheGranY = 40;
       
     this.gruaImgName = "grua";
     this.gruaAltaImgName = "grua_alta";
@@ -251,6 +252,16 @@ SideScroller.Game.prototype = {
     this.barraEnergia.body.data.gravityScale = 0;
     this.barraEnergia.body.damping = 0;
     this.barraEnergia.body.static = true;
+      
+    //Estrellas
+    this.estrellas = this.game.add.sprite(300, 20, 'ss_estrellas',3);
+    this.game.physics.p2.enable([this.estrellas], false);
+    this.estrellas.body.fixedRotation = true;
+    this.estrellas.body.data.gravityScale = 0;
+    this.estrellas.body.damping = 0;
+    this.estrellas.body.static = true;
+    this.numStars = 3;
+    this.errors = 0;
 
     //El globo
     this.player = this.game.add.sprite(200, 150, 'tile_globo',0);
@@ -681,6 +692,19 @@ SideScroller.Game.prototype = {
                this.anim_barra.play(5, true);
                this.powerUpAudio.play();
                
+               //Save stars
+               var variableSave = "stars_nivel" + (this.nivel + 1);
+               var currentstars = localStorage.getItem(variableSave);
+               
+               if ((currentstars === null) || (currentstars < this.numStars) ){ //Si no hay estrellas o han puntuado mas
+                    
+                   console.log("**** Variable: " + variableSave + "Numero estrellas: " + this.numStars);
+                   localStorage.setItem(variableSave, this.numStars);
+                   
+               }
+               
+               
+               
                this.game.time.events.add(3000, this.gotoMainQuiz, this);
            }
         }
@@ -698,6 +722,19 @@ SideScroller.Game.prototype = {
                   paquete.body.velocity.y = 0;
                   paquete.body.velocity.x = groundObjectsSpeed;
                  paquete.body.data.gravityScale = 0;
+                 
+                 //******Stars change
+                 if ((this.numStars > 0) && (!paquete.collided)){
+                     this.errors++
+                     
+                     if ((this.errors == 1) || (this.errors == 11) || (this.errors == 21)){
+                            this.numStars--;
+                            this.estrellas.body.sprite.loadTexture('ss_estrellas', this.numStars);
+                     }
+                   
+                    paquete.collided = true;
+                 }
+                 
              }
         },
     

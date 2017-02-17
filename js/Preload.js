@@ -17,18 +17,6 @@ SideScroller.Preload.prototype = {
  
     this.load.setPreloadSprite(this.preloadBar);
       
-    //Load saved data
-//    if (localStorage.getItem('gameData') == null){
-//        
-//        var gameData = {'continentCompleted':0,'questionLevel':0};
-//        localStorage.setItem("gameData", JSON.stringify(gameData));
-//      
-//	   } else {
-//            this.dataObj = JSON.parse(localStorage.getItem('gameData'));
-//        }
- 
-    //load game assets
-      
     //common
     this.load.spritesheet('start_play', 'img/common/btn_play.png', 36, 38, 2);
     this.load.image('atras_negro', 'img/common/btn_atras_negro.png');
@@ -64,6 +52,7 @@ SideScroller.Preload.prototype = {
     this.load.image('atras_blanco', 'img/mapa/btn_atras.png'); 
     this.load.spritesheet('ss_botones', 'img/mapa/btn_target.png', 32, 32, 3);
     this.load.spritesheet('tile_iconos_objetivos', 'img/mapa/barra_iconos.png', 37, 37, 18);
+    this.load.spritesheet('ss_estrellas', 'img/mapa/stars.png', 37, 15, 4);
       
     this.load.image('mapa_completo', 'img/mapa/mapa_mar_costas.png');
     this.load.image('norteamerica_col', 'img/mapa/mapa_norteamerica_col.png');
@@ -201,8 +190,8 @@ SideScroller.Preload.prototype = {
     this.load.image('arbolesSecos', 'img/common/arboles_secos.png');
     this.load.spritesheet('sheet_arbol_gran', 'img/common/arbol_gran.png', 14, 32, 2);
     this.load.spritesheet('sheet_arbol_peque', 'img/common/arbol_peque.png', 10, 15, 2);
-    this.load.spritesheet('sheet_coche_gran', 'img/common/coche_gran.png', 27, 12, 2);
-    this.load.spritesheet('sheet_coche_peque', 'img/common/coche_peque.png', 21, 12, 2);
+    this.load.spritesheet('sheet_coche_gran', 'img/common/coche_gran.png', 27, 16, 2);
+    this.load.spritesheet('sheet_coche_peque', 'img/common/coche_peque.png', 21, 16, 2);
       
       
     this.game.load.physics("sprite_physics", "balloon.json");

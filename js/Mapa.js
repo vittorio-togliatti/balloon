@@ -41,7 +41,7 @@ SideScroller.Mapa.prototype = {
           
       }
     
-    //this.obj_2 = this.game.add.sprite(47, 300, 'tile_iconos_objetivos',1);
+    this.estrellas = this.game.add.sprite(300, 20, 'ss_estrellas',0);
       
     this.bkg = this.game.add.sprite(0, 0,  'mapa_completo');
     this.norteamerica = this.game.add.sprite(65, 6,  'norteamerica_gris');
@@ -115,6 +115,11 @@ SideScroller.Mapa.prototype = {
         butt6.level=5;
         butt6.inputEnabled = true;
         butt6.events.onInputDown.add(this.gotoTempLevel, this); 
+          
+        
+        var estrellas = localStorage.getItem("stars_nivel6");
+        console.log("****** Numero de estrellas: " + estrellas + " ********");
+        var estrellasImg = this.game.add.sprite(but_oceania_x - 5, but_oceania_y + 30, 'ss_estrellas',estrellas*1);
       }   
       
       if (this.nivel > 4){//Oceania
@@ -124,6 +129,10 @@ SideScroller.Mapa.prototype = {
         butt5.level=4;
         butt5.inputEnabled = true;
         butt5.events.onInputDown.add(this.gotoTempLevel, this); 
+          
+        var estrellas = localStorage.getItem("stars_nivel5");
+        console.log("****** Numero de estrellas nivel5: " + estrellas + " ********");
+        var estrellasImg = this.game.add.sprite(but_asia_x - 5, but_asia_y + 30, 'ss_estrellas',estrellas*1);
       }    
     
       if (this.nivel > 3){//Asia
@@ -133,6 +142,10 @@ SideScroller.Mapa.prototype = {
         butt4.level=3;
         butt4.inputEnabled = true;
         butt4.events.onInputDown.add(this.gotoTempLevel, this); 
+          
+        var estrellas = localStorage.getItem("stars_nivel4");
+        console.log("****** Numero de estrellas nivel4: " + estrellas + " ********");
+        var estrellasImg = this.game.add.sprite(but_africa_x - 5, but_africa_y + 30, 'ss_estrellas',estrellas*1);
       }     
     
       if (this.nivel > 2){//africa
@@ -143,6 +156,9 @@ SideScroller.Mapa.prototype = {
         butt3.inputEnabled = true;
         butt3.events.onInputDown.add(this.gotoTempLevel, this); 
            
+        var estrellas = localStorage.getItem("stars_nivel3");
+        console.log("****** Numero de estrellas nivel3: " + estrellas + " ********");
+        var estrellasImg = this.game.add.sprite(but_europa_x - 5, but_europa_y + 30, 'ss_estrellas',estrellas*1);     
       }     
     
       
@@ -154,7 +170,9 @@ SideScroller.Mapa.prototype = {
         butt2.inputEnabled = true;
         butt2.events.onInputDown.add(this.gotoTempLevel, this); 
         
-                
+        var estrellas = localStorage.getItem("stars_nivel2");
+        console.log("****** Numero de estrellas nivel2: " + estrellas + " ********");
+        var estrellasImg = this.game.add.sprite(but_sudamerica_x - 5, but_sudamerica_y + 30, 'ss_estrellas',estrellas*1);     
       }
       
     if (this.nivel > 0){//sudamerica
@@ -163,8 +181,11 @@ SideScroller.Mapa.prototype = {
         var butt1 =  this.game.add.sprite(but_nortamerica_x, but_nortamerica_y, 'ss_botones', 1); 
         butt1.level=0;
         butt1.inputEnabled = true;
-        butt1.events.onInputDown.add(this.gotoTempLevel, this); 
+        butt1.events.onInputDown.add(this.gotoTempLevel, this);
         
+        var estrellas = localStorage.getItem("stars_nivel1");
+        console.log("****** Numero de estrellas nivel1: " + estrellas + " ********");
+        var estrellasImg = this.game.add.sprite(but_nortamerica_x - 5, but_nortamerica_y + 30, 'ss_estrellas',estrellas*1);
       } 
               
     
@@ -240,7 +261,7 @@ SideScroller.Mapa.prototype = {
           if ((this.nivel == 6 && tempLevel < 0) || tempLevel == 6){
                this.state.start('QuizFinal');
           } else {
-               this.state.start('Game');
+               this.state.start('Game',true,false); //Retain cache for preloading but clear world
           }
        
     },
